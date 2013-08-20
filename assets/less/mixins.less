@@ -1,0 +1,38 @@
+.backgroundTopBottom(@topColor, @bottomColor, @defaultColor) {
+	background: @defaultColor;
+	background: -moz-linear-gradient(top, @topColor, @bottomColor);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(@topColor), to(@bottomColor));
+	background: -webkit-linear-gradient(top, @topColor, @bottomColor);
+	background: -o-linear-gradient(top, @topColor, @bottomColor);
+	background: linear-gradient(to bottom, @topColor, @bottomColor);
+}
+
+.border-radius(@top-left, @top-right, @bottom-left, @bottom-right) {
+	-webkit-border-radius: @arguments;
+	-moz-border-radius: @arguments;
+	border-radius: @arguments;
+}
+
+.border-radius-none() {
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+}
+
+.box-shadow-outset(@x, @y, @blur, @color) {
+	-webkit-box-shadow: @arguments;
+	-moz-box-shadow: @arguments;
+	box-shadow: @arguments;
+}
+
+.box-shadow-inset(@x, @y, @blur, @color) {
+	-webkit-box-shadow: inset @arguments;
+	-moz-box-shadow: inset @arguments;
+	box-shadow: inset @arguments;
+}
+
+.box-shadow-none() {
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}

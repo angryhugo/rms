@@ -1,0 +1,14 @@
+{
+    "name": "rms",
+    "version": "0.0.1-0001",
+    "description": "manage resumes by user",
+    "repository": "git@git.leediancn.com:jisong.zhu/rms.git",
+    "dependencies": {
+        "express": "*",
+        "less-middleware": "*",
+        "jade": "*",
+        "mysql": "*",
+        "password-hash": "*",
+        "passport": "*"
+    }
+}

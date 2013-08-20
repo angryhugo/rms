@@ -1,0 +1,28 @@
+doctype 5
+html
+    head
+        meta(http-equiv='content-type', content='text/html;charset=utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=EmulateIE8, IE=8, IE=9')
+        meta(http-equiv='Pragma', content='no-cache')
+        meta(http-equiv='Cache-Control', content='no-cache')
+        meta(name='description',content='demo')
+        meta(http-equiv='keywords',content='HTML,resume Demo') 
+        meta(name='viewport',content='width=device-width, initial-scale=1.0')
+        link(rel='stylesheet',href='/assets/vendor/bootstrap/css/bootstrap.css')
+        link(rel='stylesheet',href='/static/css/login.css')
+        title
+            | login
+    body
+        div.container
+            form.form-signin(id="", method="", action="")
+                h2.form-signin-heading
+                    | Please sign in
+                input.input-block-level(type='text',placeholder='Username')
+                input.input-block-level(type='password',placeholder='Password')
+                label.checkbox
+                    input(type='checkbox',value='remember-me') 
+                    | Remember me
+                button.btn.btn-large.btn-primary(type='submit')
+                    | Sign in
+        script(type='text/javascript', src='/assets/vendor/jquery/jquery-1.9.1.js')
+        script(type='text/javascript', src='/assets/vendor/bootstrap/js/bootstrap.js')

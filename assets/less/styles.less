@@ -1,0 +1,225 @@
+html, body {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    font-size: 14px;
+}
+
+.font-setting(@family;@size:16px;@weight:normal){
+    font-family:@family;
+    font-size:@size;
+    font-weight:@weight;
+}
+
+#wrap { 
+    width:1200px; 
+    margin:0 auto;
+}
+
+#side { 
+    background: #E0E0E0; 
+    width: 400px; 
+    float: left; 
+}
+
+#inside{
+    margin:25px 5px 15px 140px;
+    width: 260px; 
+    font-weight:bold;
+    img{
+        background-color: #FFFFFF;
+        border: 1px solid #EDEDED;
+        padding: 10px;
+    }
+}
+
+#main { 
+    background: #F8F8FF; 
+    width: 800px; 
+    margin-left: 400px; 
+    position: relative;
+    hr {
+        /*border:1px dotted #BDBDBD; 直接用这句也可直接设置borded三属性 dashed虚线 dotted点状*/
+        border-width: 1px;
+        border-style: dotted;
+        border-color: #BDBDBD
+    }
+}
+
+.name-content {
+    line-height: 50px;
+    margin-bottom: 25px;
+    .font-setting("microsoft yahei";52px;bold);
+}
+
+.contact-info-title {
+    margin-top: 20px;
+    .font-setting("Times New Roman",Georgia,Serif;24px;bold);
+    color: #363636;
+}
+
+.contact-info {
+    .font-setting("Times New Roman",Georgia,Serif;20px;bold);
+    color: #BDBDBD;
+    margin-top:0px;
+}
+
+.basic-info-container {
+    margin: 15px 100px 10px 15px;
+}
+
+/*.basic-info-container p{
+    margin-right: 100px;
+}*/
+
+.basic-info-title {
+    width: 275px;
+    margin: 10px 0px 10px -10px; /*margin-left: -10px;左移动有问题 main样式添加：position: relative;*/
+    padding: 5px 0px 5px 20px;
+    .font-setting("Times New Roman",Georgia,Serif;20px;bold);
+    color: #FFFFFF;
+}
+
+.border-bottom {
+    border-bottom: 3px dashed #BDBDBD;
+}
+
+.mixin(blue){
+    background-color:#7EC0EE;
+}
+
+.mixin(yellow){
+    background-color: #EEC900;
+}
+
+.mixin(pink){
+    background-color: #EE6AA7;
+}
+
+.blue{
+    .mixin(blue);
+}
+
+.pink {
+    .mixin(pink);
+}
+
+.yellow {
+    .mixin(yellow);
+}
+
+
+#menu { 
+    width:500px; 
+    margin:0px 0px 5px 5px; 
+    padding-top: 5px;
+    /*border: 1px solid #CCC;*/ 
+    height:26px; 
+    background: #F8F8FF;
+    ul {
+        list-style: none; 
+        margin: 0px; 
+        padding: 0px;
+        li{
+            float: left;
+            img {
+                margin-left: 20px;
+            }
+            a {
+                display:block; 
+                height: 26px; 
+                /*line-height: 26px; */
+                padding-left: 20px;
+                margin-left:20px;
+                margin-top: 10px;
+                color: #AAA2A2;
+                &:hover{
+                    text-decoration: none;/*去除下划线*/
+                }
+            }
+        }
+    }
+}
+
+.content-title {
+    .font-setting("Times New Roman",Georgia,Serif;24px;bold);
+    /*float: left; */
+}
+
+.content-period {
+    .font-setting("Times New Roman",Georgia,Serif;14px;bold);
+    color: #BDBDBD;
+    /*float: left; */
+    margin-left: 10px;
+}
+
+.content-position {
+    .font-setting("Times New Roman",Georgia,Serif;12px);
+    color: #5E5E5E;
+    margin-bottom: 15px;
+}
+
+.skill-list p{
+    .font-setting("Times New Roman",Georgia,Serif;18px;bold);
+}
+
+.for-left {
+    float: left;
+    margin-right: 30px;
+}
+
+.edit-item label {
+    display: inline-block;
+    width:80px;
+}
+
+.edit {
+    border-radius: 6px;
+    background-color: #F0F0F0;
+    display: none;
+    h1 {
+        text-align: center;
+    }
+}
+
+.edit-item {
+    margin-left: 60px;
+    span {
+        font:500 20px/1.8 'Optima','Songti SC','Verdana','Microsoft Yahei',simsun,serif;
+        width: 40px;
+    }
+}
+
+.edit-profile {
+    width: 400px;
+    height: 210px;
+    position: absolute;
+    top: 200px;
+    left: 40%;
+}
+
+.edit-education {
+    width: 450px;
+    height: 280px;
+    position: absolute;
+    top: 200px;
+    left: 40%;
+}
+
+.add-education {
+    float: right;
+    margin-right: 95px;
+    margin-top: -40px
+}
+
+.edit-description {
+    margin: 0px 0px 10px;
+    width: 420px;
+    height: 100px;
+}
+
+.btn-right{
+  float: right;
+}
+
+

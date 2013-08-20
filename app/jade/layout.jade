@@ -1,0 +1,87 @@
+doctype 5
+html
+    head
+        meta(http-equiv='content-type', content='text/html;charset=utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=EmulateIE8, IE=8, IE=9')
+        meta(http-equiv='Pragma', content='no-cache')
+        meta(http-equiv='Cache-Control', content='no-cache')
+        meta(name='description',content='demo')
+        meta(http-equiv='keywords',content='HTML,resume Demo') 
+        meta(name='viewport',content='width=device-width, initial-scale=1.0')
+        link(rel='stylesheet',href='/assets/vendor/bootstrap/css/bootstrap.css')
+        title
+            block title
+        block head
+    body
+        // if lt IE 8
+            style(type="text/css").
+                body {
+                    margin: 0px;
+                    padding: 0px;
+                    text-align: center;
+                    font-family: Arial, Simsun;
+                    font-size: 12px;
+                    line-height: 200%;
+                }
+                img {
+                    display: block;
+                    border: none;
+                }
+            div(style="width:400px; margin:auto; color:#08c; text-align:center;")
+                table(style="width:100%;")
+                    tr
+                        td(colspan="5") &nbsp;
+                    tr
+                        td
+                            img(src="/static/images/notsupport.gif")
+                        td(colspan="4", style='font-size:14px;')
+                            | 很抱歉，不支持您使用的浏览器
+                            br
+                            | 请使用以下浏览器
+                    tr
+                        td(colspan="5") &nbsp;
+                    tr
+                        td(style='width:20%')
+                            a(target='_blank', href="https://www.google.com/intl/zh-CN/chrome/browser/")
+                                img(src="/static/images/chrome.gif")
+                                | Chrome 4+
+                        td(style='width:20%')
+                            a(target='_blank', href="http://firefox.com.cn/")
+                                img(src="/static/images/firefox.gif")
+                                | Firefox 4+
+                        td(style='width:20%')
+                            a(target='_blank', href="http://windows.microsoft.com/zh-cn/internet-explorer/download-ie")
+                                img(src="/static/images/ie.gif")
+                                | IE 8+
+                        td(style='width:20%')
+                            a(target='_blank', href="http://www.apple.com.cn/safari/")
+                                img(src="/static/images/safari.gif")
+                                | Safari 5+
+                        td(style='width:20%')
+                            a(target='_blank', href="http://www.opera.com/zh-cn")
+                                img(src="/static/images/opera.gif")
+                                | Opera 12+
+
+        | <!--[if gte IE 8]><!-->
+        div.wrap
+            div.navbar.navbar-fixed-top
+                div.navbar-inner
+                    div.container
+                        a.brand(href='/') RMS
+                        div.nav-collapse.collapse
+                            ul.nav
+                                li#menu-item-index
+                                    a(href='/') Index
+                                li#menu-item-show-resume
+                                    a(href='/resumes/1') Show Resume
+                                li#menu-item-new-resume
+                                    a(href='/resumes/news') New Resume
+                                li#menu-item-logout
+                                    a(href='/logout') Login out
+
+        block main-content
+
+        script(type='text/javascript', src='/assets/vendor/jquery/jquery-1.9.1.js')
+        script(type='text/javascript', src='/assets/vendor/bootstrap/js/bootstrap.js')
+        block scripts
+        | <!--<![endif]-->

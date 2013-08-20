@@ -1,0 +1,126 @@
+extends layout
+
+block title
+    | #{title}
+append head
+    link(rel='stylesheet', href='/static/css/styles.css')
+    link(rel='stylesheet', href='/assets/vendor/bootstrap/css/datetimepicker.css')
+block main-content
+    div#wrap(style='margin-top:40px')
+        div#side
+            div#inside
+                div#resume-name.name-content #{resume.name}
+                //- img(src='/static/images/a.jpg',width='200px')
+                div#resume-id(style='display:none') #{resume.id}
+                div.contact-info-title Email
+                div#email.contact-info #{resume.email}
+                div.contact-info-title Age
+                div#age.contact-info #{resume.age}
+                div.contact-info-title Gender
+                div#gender.contact-info #{resume.gender}
+                div.contact-info-title Address
+                div#address.contact-info #{resume.address}
+                div
+                    button#btn-show-edit-resume.btn(data-toggle='modal',data-target='#edit-resume',type='button') 编辑
+        div#main            
+            div.basic-info-title.blue
+                | Previous projects
+            div#employment
+                if projectList.length > 0
+                    for project in projectList
+                        div.basic-info-container.border-bottom
+                            div.content-title
+                                span 
+                                    | #{project.company}
+                                span.content-period 
+                                    | #{project.range}
+                            p
+                                | #{project.description}
+                else
+                    div.basic-info-container No Employment Info
+            
+            
+            div.basic-info-title.yellow
+                | Education
+            div.add-education
+                button.btn.btn-right#btn-show-add-education(data-toggle='modal', data-target='#edit-education',data-index='#{resume.id}', type='button') 添加
+            
+            div#education
+                if educationList.length > 0
+                    - for (var i=0;i<educationList.length;i++)
+                        div.basic-info-container.border-bottom(id='education-list#{educationList[i].id}')
+                            div.content-title
+                                span(id='university#{educationList[i].id}')
+                                    | #{educationList[i].school}
+                                span.content-period(id='university-period#{educationList[i].id}')
+                                    | #{educationList[i].range}
+                                span
+                                    button.btn.btn-delete-education.btn-right(type='button', data-index='#{educationList[i].id}') 删除
+                                span 
+                                    button.btn.btn-show-edit-education.btn-right(data-toggle='modal', data-target='#edit-education', data-index='#{educationList[i].id}',type='button') 编辑                                  
+                            div.content-position(id='university-major#{educationList[i].id}')
+                                | #{educationList[i].major}
+                else
+                    div No Education Info
+
+
+
+    div#edit-resume.modal.hide.fade
+        div.modal-header
+            button.close(type='button',data-dismiss='modal',aria-hidden='true') &times;
+            h3
+                | edit resume
+        div.modal-body
+            form#edit-resume-form(action='/resumes/#{resume.id}', method='POST')
+                div.edit-item
+                    label(for='edit-name') Name:
+                    input#edit-name(type='text',size='22',name='resume_name')
+                div.edit-item
+                    label(for='edit-email') Email:
+                    input#edit-email(type='text',size='22',name='email')
+                div.edit-item
+                    label(for='edit-age') Age:
+                    input#edit-age(type='text',size='22',name='age')
+                div.edit-item
+                    label(for='edit-gender') Gender:
+                    input#edit-gender(type='text',size='22',name='gender')
+                div.edit-item
+                    label(for='edit-address') Address:
+                    input#edit-address(type='text',size='22',name='address')
+        div.modal-footer
+            button.btn(data-dismiss='modal',aria-hidden='true') 关闭
+            button#btn-edit-resume-submit.btn.btn-primary 保存
+
+    div#edit-education.modal.hide.fade
+        div.modal-header
+            button.close(type='button',data-dismiss='modal',aria-hidden='true') &times;
+            h3
+                | edit education
+        div.modal-body
+            form#edit-education-form(action='/resumes/#{resume.id}/education/', method='POST')
+                input#education-list-index(type='hidden', name='edit_index', value='')
+                div.edit-item
+                    label(for='edit-university') University:
+                    input#edit-university(type='text',name='edit_university')
+                div.edit-item
+                    label(for='edit-university-period-from') From:
+                    input#edit-university-period-from.form_datetime(type='text',name='edit_period_from',readonly)
+                    span.add-on
+                        i.icon-th
+                div.edit-item
+                    label(for='edit-university-period-to') To:
+                    input#edit-university-period-to.form_datetime(type='text',name='edit_period_to',readonly)
+                    span.add-on
+                        i.icon-th
+                div.edit-item
+                    label(for='edit-university-major') Major:
+                    input#edit-university-major(type='text',name='edit_university_major')
+        div.modal-footer
+            button.btn(data-dismiss='modal',aria-hidden='true') 关闭
+            button#btn-edit-education-submit.btn.btn-primary(data-dismiss='modal') 保存
+
+    block scripts
+        script(type='text/javascript', src='/assets/vendor/bootstrap/js/bootstrap-datetimepicker.js')
+        script(type='text/javascript', src='/assets/vendor/jquery/jquery.validate.js')
+        script(type='text/javascript', src='/assets/vendor/jquery/jquery.validate.messages_cn.js')
+        script(type='text/javascript', src='/assets/js/show-resume.js')
