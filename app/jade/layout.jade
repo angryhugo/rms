@@ -9,10 +9,12 @@ html
         meta(http-equiv='keywords',content='HTML,resume Demo') 
         meta(name='viewport',content='width=device-width, initial-scale=1.0')
         link(rel='stylesheet',href='/assets/vendor/bootstrap/css/bootstrap.css')
+        link(rel='stylesheet', href='/assets/vendor/bootstrap/css/bootstrap-responsive.css')
+        link(rel='stylesheet',href='/static/css/layout.css')
         title
             block title
         block head
-    body
+    body.body-color
         // if lt IE 8
             style(type="text/css").
                 body {
@@ -63,21 +65,24 @@ html
                                 | Opera 12+
 
         | <!--[if gte IE 8]><!-->
-        div.wrap
-            div.navbar.navbar-fixed-top
-                div.navbar-inner
-                    div.container
-                        a.brand(href='/') RMS
-                        div.nav-collapse.collapse
-                            ul.nav
-                                li#menu-item-index
-                                    a(href='/') Index
-                                li#menu-item-show-resume
-                                    a(href='/resumes/1') Show Resume
-                                li#menu-item-new-resume
-                                    a(href='/resumes/news') New Resume
-                                li#menu-item-logout
-                                    a(href='/logout') Login out
+        div.navbar.navbar-inverse.navbar-fixed-top
+            div.navbar-inner
+                div.container
+                    a.brand(href='/') RMS
+                    a.btn.btn-navbar(data-toggle="collapse",data-target=".nav-collapse")
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    div#navigation.nav-collapse.collapse
+                        ul.nav
+                            li#menu-item-index
+                                a(href='/') Index
+                            li#menu-item-show-resume
+                                a(href='/resumes/1') Show Resume
+                            li#menu-item-new-resume
+                                a(href='/resumes/new') New Resume
+                            li#menu-item-logout
+                                a(href='/logout') Login out
 
         block main-content
 

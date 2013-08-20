@@ -3,66 +3,105 @@ extends layout
 block title
     | #{title}
 append head
-    link(rel='stylesheet', href='/static/css/styles.css')
+    link(rel='stylesheet', href='/static/css/show-resume.css')
     link(rel='stylesheet', href='/assets/vendor/bootstrap/css/datetimepicker.css')
 block main-content
-    div#wrap(style='margin-top:40px')
-        div#side
-            div#inside
-                div#resume-name.name-content #{resume.name}
-                //- img(src='/static/images/a.jpg',width='200px')
-                div#resume-id(style='display:none') #{resume.id}
-                div.contact-info-title Email
-                div#email.contact-info #{resume.email}
-                div.contact-info-title Age
-                div#age.contact-info #{resume.age}
-                div.contact-info-title Gender
-                div#gender.contact-info #{resume.gender}
-                div.contact-info-title Address
-                div#address.contact-info #{resume.address}
-                div
-                    button#btn-show-edit-resume.btn(data-toggle='modal',data-target='#edit-resume',type='button') 编辑
-        div#main            
-            div.basic-info-title.blue
-                | Previous projects
-            div#employment
-                if projectList.length > 0
-                    for project in projectList
-                        div.basic-info-container.border-bottom
-                            div.content-title
-                                span 
-                                    | #{project.company}
-                                span.content-period 
-                                    | #{project.range}
-                            p
-                                | #{project.description}
-                else
-                    div.basic-info-container No Employment Info
-            
-            
-            div.basic-info-title.yellow
-                | Education
-            div.add-education
-                button.btn.btn-right#btn-show-add-education(data-toggle='modal', data-target='#edit-education',data-index='#{resume.id}', type='button') 添加
-            
-            div#education
-                if educationList.length > 0
-                    - for (var i=0;i<educationList.length;i++)
-                        div.basic-info-container.border-bottom(id='education-list#{educationList[i].id}')
-                            div.content-title
-                                span(id='university#{educationList[i].id}')
-                                    | #{educationList[i].school}
-                                span.content-period(id='university-period#{educationList[i].id}')
-                                    | #{educationList[i].range}
-                                span
-                                    button.btn.btn-delete-education.btn-right(type='button', data-index='#{educationList[i].id}') 删除
-                                span 
-                                    button.btn.btn-show-edit-education.btn-right(data-toggle='modal', data-target='#edit-education', data-index='#{educationList[i].id}',type='button') 编辑                                  
-                            div.content-position(id='university-major#{educationList[i].id}')
-                                | #{educationList[i].major}
-                else
-                    div No Education Info
+    article.container
+        section.row.row-style.row-padding-bottom
+            div.span12.padding-nav-top
+                div.row
+                    div.span8
+                        div#resume-name.span8.name-content #{resume.name}
+                        div#resume-id.span8(style='display:none') #{resume.id}
+                        div.row
+                            div.span3
+                                h3
+                                    | Email
+                                div#email.contact-info #{resume.email}
+                                h3
+                                    | Age
+                                div#age.contact-info #{resume.age}
+                            div.span3.offset1
+                                h3
+                                    |Gender
+                                div#gender.contact-info #{resume.gender}
+                                h3
+                                    | Address
+                                div#address.contact-info #{resume.address}
+                            div.span1
+                                button#btn-show-edit-resume.btn(data-toggle='modal',data-target='#edit-resume',type='button') 编辑
 
+        section.row.row-style.row-padding-bottom
+            div.span12.block-left
+                div.row
+                    div.span8
+                        h1
+                            | 学习经历
+                    div.span4
+                        div.span2.offset2
+                            button#btn-show-add-education.btn(data-toggle='modal', data-target='#edit-education',data-index='#{resume.id}', type='button') 添加
+
+            if educationList.length > 0
+                div.span12
+                    div.span3
+                        h3
+                            | University
+                    div.span3
+                        h3
+                            | Period
+                    div.span3
+                        h3
+                            | Major
+                - for (var i=0;i<educationList.length;i++)
+                    div.span12(id='education-list#{educationList[i].id}')
+                        div.span3(id='university#{educationList[i].id}')
+                            | #{educationList[i].school}
+                        div.span3(id='university-period#{educationList[i].id}')
+                            | #{educationList[i].range}
+                        div.span3(id='university-major#{educationList[i].id}')
+                            | #{educationList[i].major}
+                        div.span2
+                            button.btn.btn-show-edit-education(data-toggle='modal', data-target='#edit-education', data-index='#{educationList[i].id}',type='button') 编辑
+                            span
+                                button.btn.btn-delete-education(type='button', data-index='#{educationList[i].id}') 删除
+                                                                  
+
+
+        section.row.row-style.row-padding-bottom
+            div.span12.block-left
+                h1
+                    | 项目经历
+            div.span12
+                div.tabbable
+                    ul.nav.nav-tabs
+                        if projectList.length > 0
+                            - for (var i=0;i<projectList.length;i++)
+                                if i==0
+                                    li.active
+                                        a(href="#tab#{i+1}",data-toggle="tab") 项目#{i+1}
+                                else
+                                    li
+                                        a(href="#tab#{i+1}",data-toggle="tab") 项目#{i+1}
+
+                    div.tab-content
+                        if projectList.length > 0
+                            - for (var i=0;i<projectList.length;i++)
+                                if i==0
+                                    div.tab-pane.active(id="tab#{i+1}")
+                                        h3.first-upper.project-company-top
+                                            | #{projectList[i].company}
+                                            span.project-range
+                                                | #{projectList[i].range}
+                                        p.first-upper.paragraph-indent
+                                            | #{projectList[i].description}
+                                else
+                                    div.tab-pane(id="tab#{i+1}")
+                                        h3.first-upper.project-company-top
+                                            | #{projectList[i].company}
+                                            span.project-range
+                                                | #{projectList[i].range}
+                                        p.first-upper.paragraph-indent
+                                            | #{projectList[i].description}
 
 
     div#edit-resume.modal.hide.fade
@@ -72,21 +111,36 @@ block main-content
                 | edit resume
         div.modal-body
             form#edit-resume-form(action='/resumes/#{resume.id}', method='POST')
-                div.edit-item
-                    label(for='edit-name') Name:
-                    input#edit-name(type='text',size='22',name='resume_name')
-                div.edit-item
-                    label(for='edit-email') Email:
-                    input#edit-email(type='text',size='22',name='email')
-                div.edit-item
-                    label(for='edit-age') Age:
-                    input#edit-age(type='text',size='22',name='age')
-                div.edit-item
-                    label(for='edit-gender') Gender:
-                    input#edit-gender(type='text',size='22',name='gender')
-                div.edit-item
-                    label(for='edit-address') Address:
-                    input#edit-address(type='text',size='22',name='address')
+                div.span5
+                    div.row
+                        div.span1
+                            label(for='edit-name') Name:
+                        div.span4
+                            input#edit-name(type='text',size='22',name='resume_name')
+                div.span5
+                    div.row
+                        div.span1
+                            label(for='edit-email') Email:
+                        div.span4
+                            input#edit-email(type='text',size='22',name='email')
+                div.span5
+                    div.row
+                        div.span1
+                            label(for='edit-age') Age:
+                        div.span4
+                            input#edit-age(type='text',size='22',name='age')
+                div.span5
+                    div.row
+                        div.span1
+                            label(for='edit-gender') Gender:
+                        div.span4
+                            input#edit-gender(type='text',size='22',name='gender')
+                div.span5
+                    div.row
+                        div.span1
+                            label(for='edit-address') Address:
+                        div.span4
+                            input#edit-address(type='text',size='22',name='address')
         div.modal-footer
             button.btn(data-dismiss='modal',aria-hidden='true') 关闭
             button#btn-edit-resume-submit.btn.btn-primary 保存
@@ -99,22 +153,30 @@ block main-content
         div.modal-body
             form#edit-education-form(action='/resumes/#{resume.id}/education/', method='POST')
                 input#education-list-index(type='hidden', name='edit_index', value='')
-                div.edit-item
-                    label(for='edit-university') University:
-                    input#edit-university(type='text',name='edit_university')
-                div.edit-item
-                    label(for='edit-university-period-from') From:
-                    input#edit-university-period-from.form_datetime(type='text',name='edit_period_from',readonly)
-                    span.add-on
-                        i.icon-th
-                div.edit-item
-                    label(for='edit-university-period-to') To:
-                    input#edit-university-period-to.form_datetime(type='text',name='edit_period_to',readonly)
-                    span.add-on
-                        i.icon-th
-                div.edit-item
-                    label(for='edit-university-major') Major:
-                    input#edit-university-major(type='text',name='edit_university_major')
+                div.span5
+                    div.row
+                        div.span1
+                            label(for='edit-university') University:
+                        div.span4
+                            input#edit-university(type='text',name='edit_university')
+                div.span5
+                    div.row
+                        div.span1
+                            label(for='edit-university-period-from') From:
+                        div.span4
+                            input#edit-university-period-from.form_datetime(type='text',name='edit_period_from',readonly)
+                div.span5
+                    div.row
+                        div.span1
+                            label(for='edit-university-period-to') To:
+                        div.span4
+                            input#edit-university-period-to.form_datetime(type='text',name='edit_period_to',readonly)
+                div.span5
+                    div.row
+                        div.span1
+                            label(for='edit-university-major') Major:
+                        div.span4
+                            input#edit-university-major(type='text',name='edit_university_major')
         div.modal-footer
             button.btn(data-dismiss='modal',aria-hidden='true') 关闭
             button#btn-edit-education-submit.btn.btn-primary(data-dismiss='modal') 保存

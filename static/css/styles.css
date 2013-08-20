@@ -1,0 +1,170 @@
+html,
+body {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  font-size: 14px;
+}
+
+.name-content {
+  line-height: 50px;
+  margin-bottom: 25px;
+  font-family: "microsoft yahei";
+  font-size: 52px;
+  font-weight: bold;
+}
+.contact-info-title {
+  margin-top: 20px;
+  font-family: "Times New Roman", Georgia, Serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #363636;
+}
+.contact-info {
+  font-family: "Times New Roman", Georgia, Serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #BDBDBD;
+  margin-top: 0px;
+}
+.basic-info-container {
+  margin: 15px 100px 10px 15px;
+}
+/*.basic-info-container p{
+    margin-right: 100px;
+}*/
+.basic-info-title {
+  width: 275px;
+  margin: 10px 0px 10px -10px;
+  /*margin-left: -10px;左移动有问题 main样式添加：position: relative;*/
+
+  padding: 5px 0px 5px 20px;
+  font-family: "Times New Roman", Georgia, Serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+.border-bottom {
+  border-bottom: 3px dashed #BDBDBD;
+}
+.blue {
+  background-color: #7EC0EE;
+}
+.pink {
+  background-color: #EE6AA7;
+}
+.yellow {
+  background-color: #EEC900;
+}
+#menu {
+  width: 500px;
+  margin: 0px 0px 5px 5px;
+  padding-top: 5px;
+  /*border: 1px solid #CCC;*/
+  height: 26px;
+  background: #F8F8FF;
+}
+#menu ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+#menu ul li {
+  float: left;
+}
+#menu ul li img {
+  margin-left: 20px;
+}
+#menu ul li a {
+  display: block;
+  height: 26px;
+  /*line-height: 26px; */
+
+  padding-left: 20px;
+  margin-left: 20px;
+  margin-top: 10px;
+  color: #AAA2A2;
+}
+#menu ul li a:hover {
+  text-decoration: none;
+  /*去除下划线*/
+
+}
+.content-title {
+  font-family: "Times New Roman", Georgia, Serif;
+  font-size: 24px;
+  font-weight: bold;
+  /*float: left; */
+
+}
+.content-period {
+  font-family: "Times New Roman", Georgia, Serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #BDBDBD;
+  /*float: left; */
+
+  margin-left: 10px;
+}
+.content-position {
+  font-family: "Times New Roman", Georgia, Serif;
+  font-size: 12px;
+  font-weight: normal;
+  color: #5E5E5E;
+  margin-bottom: 15px;
+}
+.skill-list p {
+  font-family: "Times New Roman", Georgia, Serif;
+  font-size: 18px;
+  font-weight: bold;
+}
+.for-left {
+  float: left;
+  margin-right: 30px;
+}
+.edit-item label {
+  display: inline-block;
+  width: 80px;
+}
+.edit {
+  border-radius: 6px;
+  background-color: #F0F0F0;
+  display: none;
+}
+.edit h1 {
+  text-align: center;
+}
+.edit-item {
+  margin-left: 60px;
+}
+.edit-item span {
+  font: 500 20px/1.8 'Optima', 'Songti SC', 'Verdana', 'Microsoft Yahei', simsun, serif;
+  width: 40px;
+}
+.edit-profile {
+  width: 400px;
+  height: 210px;
+  position: absolute;
+  top: 200px;
+  left: 40%;
+}
+.edit-education {
+  width: 450px;
+  height: 280px;
+  position: absolute;
+  top: 200px;
+  left: 40%;
+}
+.add-education {
+  float: right;
+  margin-right: 95px;
+  margin-top: -40px;
+}
+.edit-description {
+  margin: 0px 0px 10px;
+  width: 420px;
+  height: 100px;
+}
+.btn-right {
+  float: right;
+}

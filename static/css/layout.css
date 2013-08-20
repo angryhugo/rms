@@ -1,0 +1,13 @@
+.padding-nav-top {
+	padding-top: 80px;
+}
+
+.body-color {
+	/*background-color: #d3d3d3;*/
+    /*从上至下线性变换*/
+    /*RGBA在RGB的基础上多了控制alpha透明度的参数 如background: -moz-linear-gradient( top ,rgba(204,204,204,0.8), rgba(82,82,82,0.8));/*Mozilla*/
+
+    background: -webkit-linear-gradient( top, #CCCCCC, #525252);/*new gradient for Webkit*/
+    background: -moz-linear-gradient( top, #CCCCCC, #525252);/*Mozilla*/
+    background: -o-linear-gradient-linear-gradient( top, #CCCCCC, #525252);/*Opera11*/
+}
