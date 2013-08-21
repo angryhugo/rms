@@ -111,3 +111,43 @@ exports.deleteEducation = function(education_id, callback) {
 		callback(err);
 	});
 };
+
+exports.editProject = function(id, newProject, callback) {
+	Project.find(id).success(function(project) {
+		project.range = newProject.range;
+		project.company = newProject.company;
+		project.description = newProject.description;
+		project.save().success(function(project) {
+			callback(null);
+		}).error(function(err) {
+			callback(err);
+		});
+	}).error(function(err) {
+		callback(err);
+	});
+};
+
+exports.addProject = function(resumeId, newProject, callback) {
+	Project.create({
+		range: newProject.range,
+		company: newProject.company,
+		description: newProject.description,
+		resume_id: resumeId
+	}).success(function(project) {
+		callback(null);
+	}).error(function(err) {
+		callback(err);
+	});
+};
+
+exports.deleteProject = function(project_id, callback) {
+	Project.find(project_id).success(function(project) {
+		project.destroy().success(function(pro) {
+			callback(null);
+		}).error(function(err) {
+			callback(err);
+		});
+	}).error(function(err) {
+		callback(err);
+	});
+};

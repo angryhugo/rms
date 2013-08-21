@@ -13,6 +13,10 @@ module.exports = function(app) {
     app.post('/resumes/:resume_id/education/:id', controller.editEducation);
     app.delete('/resumes/:resume_id/education/:id', controller.deleteEducation);
 
+    app.post('/resumes/:resume_id/projects/new', controller.addProject);
+    app.post('/resumes/:resume_id/projects/:id', controller.editProject);
+    app.delete('/resumes/:resume_id/projects/:id', controller.deleteProject);
+
 
 
     // app.delete('/skills/:skill_type/:index', controller.deleteSkills);

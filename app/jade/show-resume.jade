@@ -65,42 +65,37 @@ block main-content
                             span
                                 button.btn.btn-delete-education.btn-color(type='button', data-index='#{educationList[i].id}') 删除
                                                                   
-
-
         section.row.row-style.row-padding-bottom
-            div.span12.block-left
-                h1
-                    | Projects
+           div.span12.block-left
+                div.row
+                    div.span8
+                        h1
+                            | Projects
+                    div.span4
+                        div.span2.offset2
+                            button#btn-show-add-project.btn.btn-color(data-toggle='modal', data-target='#edit-project',data-index='#{resume.id}', type='button') 添加
             div.span12
                 div.tabbable
                     ul.nav.nav-tabs
                         if projectList.length > 0
                             - for (var i=0;i<projectList.length;i++)
-                                if i==0
-                                    li.active
-                                        a(href="#tab#{i+1}",data-toggle="tab") 项目#{i+1}
-                                else
-                                    li
-                                        a(href="#tab#{i+1}",data-toggle="tab") 项目#{i+1}
+                                li(id='project-list#{projectList[i].id}')
+                                    a(href="#tab#{projectList[i].id}",data-toggle="tab") pro#{i+1}
 
                     div.tab-content
                         if projectList.length > 0
                             - for (var i=0;i<projectList.length;i++)
-                                if i==0
-                                    div.tab-pane.active(id="tab#{i+1}")
-                                        h3.first-upper.project-company-top
+                                div.span12.tab-pane(id="tab#{projectList[i].id}")
+                                    div.row
+                                        div.span3.project-range(id="company#{i+1}")
                                             | #{projectList[i].company}
-                                            span.project-range
-                                                | #{projectList[i].range}
-                                        p.first-upper.paragraph-indent
-                                            | #{projectList[i].description}
-                                else
-                                    div.tab-pane(id="tab#{i+1}")
-                                        h3.first-upper.project-company-top
-                                            | #{projectList[i].company}
-                                            span.project-range
-                                                | #{projectList[i].range}
-                                        p.first-upper.paragraph-indent
+                                        div.span3.project-range(id="company-period#{i+1}")
+                                            | #{projectList[i].range}
+                                        div.span2.offset4
+                                            button.btn.btn-show-edit-project.btn-color(data-toggle='modal', data-target='#edit-project', data-index='#{projectList[i].id}',type='button') 编辑
+                                            span
+                                                button.btn.btn-delete-project.btn-color(type='button', data-index='#{projectList[i].id}') 删除
+                                    p.first-upper.paragraph-indent(id="company-description#{i+1}")
                                             | #{projectList[i].description}
 
 
@@ -164,13 +159,13 @@ block main-content
                         div.span1
                             label(for='edit-university-period-from') From:
                         div.span4
-                            input#edit-university-period-from.form_datetime(type='text',name='edit_period_from',readonly)
+                            input#edit-university-period-from.form_datetime(type='text',name='edit_university_period_from',readonly)
                 div.span5
                     div.row
                         div.span1
                             label(for='edit-university-period-to') To:
                         div.span4
-                            input#edit-university-period-to.form_datetime(type='text',name='edit_period_to',readonly)
+                            input#edit-university-period-to.form_datetime(type='text',name='edit_university_period_to',readonly)
                 div.span5
                     div.row
                         div.span1
@@ -180,6 +175,42 @@ block main-content
         div.modal-footer
             button.btn(data-dismiss='modal',aria-hidden='true') 关闭
             button#btn-edit-education-submit.btn.btn-primary(data-dismiss='modal') 保存
+
+    div#edit-project.modal.hide.fade
+        div.modal-header
+            button.close(type='button',data-dismiss='modal',aria-hidden='true') &times;
+            h3
+                | edit project
+        div.modal-body
+            form#edit-project-form(action='/resumes/#{resume.id}/projects/', method='POST')
+                input#project-list-index(type='hidden', name='edit_index', value='')
+                div.span5
+                    div.row
+                        div.span1
+                            label(for='edit-company') Company:
+                        div.span4
+                            input#edit-company(type='text',name='edit_company')
+                div.span5
+                    div.row
+                        div.span1
+                            label(for='edit-company-period-from') From:
+                        div.span4
+                            input#edit-company-period-from.form_datetime(type='text',name='edit_company_period_from',readonly)
+                div.span5
+                    div.row
+                        div.span1
+                            label(for='edit-company-period-to') To:
+                        div.span4
+                            input#edit-company-period-to.form_datetime(type='text',name='edit_company_period_to',readonly)
+                div.span5
+                    div.row
+                        div.span1
+                            label(for='edit-company-description') Description:
+                        div.span4
+                            textarea#edit-company-description(type='text',name='edit_company_description',rows="5")
+        div.modal-footer
+            button.btn(data-dismiss='modal',aria-hidden='true') 关闭
+            button#btn-edit-project-submit.btn.btn-primary(data-dismiss='modal') 保存
 
     block scripts
         script(type='text/javascript', src='/assets/vendor/bootstrap/js/bootstrap-datetimepicker.js')

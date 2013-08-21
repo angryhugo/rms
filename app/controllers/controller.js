@@ -58,8 +58,6 @@ module.exports = {
         });
     },
 
-
-
     editResumeBasic: function(req, res) {
         var resumeId = req.params.id || "";
         var newResume = {
@@ -118,12 +116,53 @@ module.exports = {
             }
         });
     },
-}
+
+
+    editProject: function(req, res) {
+        var newProject = getNewProject(req, res);
+        var resumeId = req.params.resume_id || "";
+        var projectId = req.params.id || "";
+        dbHelper.editProject(projectId, newProject, function(err) {
+            if (err) {
+                console.log(err);
+                res.send('Server error!');
+            } else {
+                res.redirect('/resumes/' + resumeId);
+            }
+        })
+    },
+
+    addProject: function(req, res) {
+        var newProject = getNewProject(req, res);
+        var resumeId = req.params.resume_id || "";
+        dbHelper.addProject(resumeId, newProject, function(err) {
+            if (err) {
+                console.log(err);
+                res.send('Server error!');
+            } else {
+                res.redirect('/resumes/' + resumeId);
+            }
+        })
+    },
+
+    deleteProject: function(req, res) {
+        var id = req.params.id || '';
+        var resumeId = req.params.resume_id || "";
+        dbHelper.deleteProject(id, function(err) {
+            if (err) {
+                console.log(err);
+                res.send('Server error!');
+            } else {
+                res.send('Delete successfully!');
+            }
+        });
+    },
+};
 
 function getNewEducation(req, res) {
     var university = req.body.edit_university || "";
-    var periodFrom = req.body.edit_period_from || "";
-    var periodTo = req.body.edit_period_to || "";
+    var periodFrom = req.body.edit_university_period_from || "";
+    var periodTo = req.body.edit_university_period_to || "";
     var major = req.body.edit_university_major || "";
     var newEducation = {
         school: university,
@@ -131,4 +170,17 @@ function getNewEducation(req, res) {
         major: major,
     };
     return newEducation;
+};
+
+function getNewProject(req, res) {
+    var company = req.body.edit_company || "";
+    var periodFrom = req.body.edit_company_period_from || "";
+    var periodTo = req.body.edit_company_period_to || "";
+    var description = req.body.edit_company_description || "";
+    var newProject = {
+        company: company,
+        range: periodFrom + "-" + periodTo,
+        description: description,
+    };
+    return newProject;
 }
