@@ -23,6 +23,15 @@ module.exports = {
         res.render('login');
     },
 
+    showResumeList: function(req, res) {
+        var userId = 1; ///////获取登录后的userId
+        dbHelper.showResumeList(userId, function(err, resumeList, existFlag) {
+            if (err) {
+                console.log(err);
+            }
+        });
+    },
+
     viewResume: function(req, res) {
         var resumeId = req.params.id || "";
         dbHelper.showResumeInfo(resumeId, function(err, allInfo, existFlag) {

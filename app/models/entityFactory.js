@@ -76,7 +76,7 @@ var Project = sequelize.define('project', {
     },
     range: Sequelize.STRING,
     company: Sequelize.STRING,
-    description: Sequelize.STRING
+    description: Sequelize.TEXT
 });
 
 Project.belongsTo(Resume);

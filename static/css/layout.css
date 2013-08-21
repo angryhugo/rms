@@ -11,3 +11,7 @@
     background: -moz-linear-gradient( top, #CCCCCC, #525252);/*Mozilla*/
     background: -o-linear-gradient-linear-gradient( top, #CCCCCC, #525252);/*Opera11*/
 }
+
+.btn-color {
+    background: #e3e1ec;
+}

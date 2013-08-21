@@ -29,17 +29,17 @@ block main-content
                                     | Address
                                 div#address.contact-info #{resume.address}
                             div.span1
-                                button#btn-show-edit-resume.btn(data-toggle='modal',data-target='#edit-resume',type='button') 编辑
+                                button#btn-show-edit-resume.btn.btn-color(data-toggle='modal',data-target='#edit-resume',type='button') 编辑
 
         section.row.row-style.row-padding-bottom
             div.span12.block-left
                 div.row
                     div.span8
                         h1
-                            | 学习经历
+                            | Education
                     div.span4
                         div.span2.offset2
-                            button#btn-show-add-education.btn(data-toggle='modal', data-target='#edit-education',data-index='#{resume.id}', type='button') 添加
+                            button#btn-show-add-education.btn.btn-color(data-toggle='modal', data-target='#edit-education',data-index='#{resume.id}', type='button') 添加
 
             if educationList.length > 0
                 div.span12
@@ -61,16 +61,16 @@ block main-content
                         div.span3(id='university-major#{educationList[i].id}')
                             | #{educationList[i].major}
                         div.span2
-                            button.btn.btn-show-edit-education(data-toggle='modal', data-target='#edit-education', data-index='#{educationList[i].id}',type='button') 编辑
+                            button.btn.btn-show-edit-education.btn-color(data-toggle='modal', data-target='#edit-education', data-index='#{educationList[i].id}',type='button') 编辑
                             span
-                                button.btn.btn-delete-education(type='button', data-index='#{educationList[i].id}') 删除
+                                button.btn.btn-delete-education.btn-color(type='button', data-index='#{educationList[i].id}') 删除
                                                                   
 
 
         section.row.row-style.row-padding-bottom
             div.span12.block-left
                 h1
-                    | 项目经历
+                    | Projects
             div.span12
                 div.tabbable
                     ul.nav.nav-tabs

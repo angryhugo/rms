@@ -2,7 +2,8 @@ var controller = require('./controllers/controller');
 
 module.exports = function(app) {
 
-    app.get('/', controller.index);
+    app.get('/', controller.login);
+    app.get('/resumes', controller.showResumeList);
     app.get('/login', controller.login);
 
     app.get('/resumes/:id', controller.viewResume);

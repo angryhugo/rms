@@ -65,7 +65,6 @@ $(function() {
         _editUniversityPeriodFrom.val("");
         _editUniversityPeriodTo.val("");
         _editUniversityMajor.val("");
-        _editUniversityDescription.val("");
     }
 
     var submitEditEducation = function() {
@@ -75,7 +74,6 @@ $(function() {
                 $('#education-list-index').val(_presentEducationIndex);
             }
             _editEducationForm.submit();
-            emptyEditEducation();
         }
     }
 
@@ -124,65 +122,13 @@ $(function() {
     _showAddEducationBtn.bind('click', function() {
         //_editEducation.fadeIn("slow");
         _presentEducationIndex = 10000; //定义10000时 为添加新条目
+        emptyEditEducation();
         _editEducationForm.attr('action', '/resumes/' + _resumeId + '/education/new');
     });
 
-    var deleteSkills = function() {
-        if (confirm("确定删除" + $(this).text() + "吗？")) {
-            var thisLi = $(this);
-            var index = $(this).data("index");
-            var skillType = $(this).parent().data("skilltype");
-            $.ajax({
-                url: 'skills/' + skillType + '/' + index,
-                type: 'DELETE',
-                dataType: 'text',
-                success: function(data) {
-                    alert(data);
-                    thisLi.remove();
-                },
-                error: function(xhr, status, err) {
-                    alert(xhr.responseText);
-                }
-            });
-        }
-    };
-
-    $(".skill-list ul li").on('click', deleteSkills);
-
-    var addSkills = function() {
-        var thisP = $(this);
-        var skillType = thisP.next().data('skilltype');
-        var skillName = prompt("请输入要添加的项");
-        if (!skillName) {
-            alert("不允许添加空值！");
-            return false;
-        } else if (confirm("确定要添加“" + skillName + "”吗？")) {
-            $.ajax({
-                url: 'skills/' + skillType + '/' + skillName,
-                type: 'POST',
-                dataType: 'json',
-                success: function(data) {
-                    if (!data.exitFlag) {
-                        alert(data.info);
-                        var newIndex = data.newId;
-                        var $addItem = $("<li data-index='" + newIndex + "'>" + skillName + "</li>");
-                        $addItem.appendTo(thisP.next()).on('click', deleteSkills);
-                    } else {
-                        alert("already existed!");
-                    }
-                },
-                error: function(xhr, status, err) {
-                    alert(xhr.responseText);
-                }
-            });
-        }
-    };
-
-    $(".skill-list p").on('click', addSkills);
-
     _editResumeForm.validate({
         rules: {
-            username: {
+            resume_name: {
                 required: true,
                 minlength: 2
             },
@@ -190,7 +136,8 @@ $(function() {
                 required: true,
                 email: true
             },
-            phone: "required",
+            age: "required",
+            gender: "required",
             address: "required"
         }
     });
