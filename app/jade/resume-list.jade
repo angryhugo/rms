@@ -1,0 +1,55 @@
+extends layout
+
+block title
+    | resume list
+append head
+    link(rel='stylesheet', href='/static/css/resume-list.css')
+block main-content
+    article.container
+            section.row.row-style.row-padding-bottom
+                div.span12.padding-nav-top
+                    div#user-name.span12.name-content #{user.name}
+                    div#user-id.span12(style='display:none') #{user.id}
+                    div.row
+                        div.span3
+                            h3
+                                | Email
+                            div#email.contact-info #{user.email}
+
+            section.row.row-style.row-padding-bottom
+                div.span12.block-left
+                    div.row
+                        div.span8
+                            h1
+                                | Resume List
+                        div.span4
+                            div.span2.offset2
+                                button#btn-show-add-resume.btn.btn-color(data-index='#{user.id}', type='button') 添加
+
+                if resumeList.length > 0
+                    div.span12
+                        div.span3
+                            h3
+                                | Resume Name
+                        div.span3
+                            h3
+                                | Email
+                        div.span3
+                            h3
+                                | Address
+                    - for (var i=0;i<resumeList.length;i++)
+                        div.span12(id='resume-list#{resumeList[i].id}')
+                            div.span3
+                                | #{resumeList[i].name}
+                            div.span3
+                                | #{resumeList[i].email}
+                            div.span3
+                                | #{resumeList[i].address}
+                            div.span2
+                                button.btn.btn-show-resume.btn-color(data-index='#{resumeList[i].id}',type='button') 查看
+                                span
+                                    button.btn.btn-delete-resume.btn-color(type='button', data-index='#{resumeList[i].id}') 删除
+
+
+    block scripts
+        script(type='text/javascript', src='/assets/js/resume-list.js')

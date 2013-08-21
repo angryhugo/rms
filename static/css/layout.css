@@ -3,15 +3,123 @@
 }
 
 .body-color {
-	/*background-color: #d3d3d3;*/
-    /*从上至下线性变换*/
-    /*RGBA在RGB的基础上多了控制alpha透明度的参数 如background: -moz-linear-gradient( top ,rgba(204,204,204,0.8), rgba(82,82,82,0.8));/*Mozilla*/
+	background-color: #A3A3A3;
+}
 
-    background: -webkit-linear-gradient( top, #CCCCCC, #525252);/*new gradient for Webkit*/
-    background: -moz-linear-gradient( top, #CCCCCC, #525252);/*Mozilla*/
-    background: -o-linear-gradient-linear-gradient( top, #CCCCCC, #525252);/*Opera11*/
+.nav-tabs > .active > a,
+.nav-tabs > .active > a:hover,
+.nav-tabs > .active > a:focus {
+    font:500 20px/1.8 'Optima','Songti SC','Verdana','Microsoft Yahei',simsun,serif;
+    /*即定义了 font-size=20px, line-height=1.8, font-family='Optima','Songti SC','Verdana','Microsoft Yahei',simsun,serif*/
+    background-color: #e3e1ec;
+    text-shadow: 1px 1px 5px rgb(99, 96, 94);/*text-shadow:[x轴(X Offset) y轴(Y Offset)  模糊半径(Blur)  颜色(Color)]*/
+    /*color: #555555;
+    cursor: default;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;*/
+}
+
+.nav-tabs > li > a {
+    font: 500 12px/1.8 'Optima','Songti SC','Verdana','Microsoft Yahei',simsun,serif;
+    color: rgb(190, 190, 190);
+}
+
+.nav-tabs > li > a:hover{
+    background-color: #DEDCEB;
+}
+
+.navbar-inverse .nav > li > a:hover { /*到上方后有个左移的效果怎么去掉 离开时怎么慢慢下来*/
+/*    -webkit-text-fill-color: transparent;   设置颜色*/
+    -webkit-transform: translateY(-5px);
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    transition: .5s;
+}
+
+.navbar-inverse .nav > li > a {
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    transition: .5s;
 }
 
 .btn-color {
     background: #e3e1ec;
+}
+
+.row-style {
+    /*margin-bottom: 60px;
+    padding-top: 40px;
+    padding-bottom: 20px;*/
+    padding: 0px;
+    margin-bottom: 120px;
+    border-radius: 6px;
+/*  background-color: #e5e5e5;*/
+    background-color: #e3e1ec;
+    box-shadow: 2px 2px 5px #2c2c2c;
+}
+
+.row-padding-bottom {
+    padding-bottom: 20px;
+}
+
+.row-style h1, .row-style h3 {
+    cursor: default;
+    background: -webkit-linear-gradient(top, rgba(70, 70, 70, 1) 0%,rgba(111, 111, 111, 1) 50%,rgba(10, 14, 10, 1) 51%,rgba(10, 8, 9, 1) 100%);
+    -webkit-box-reflect: below -7px -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(.2, transparent), to(rgba(3,3,3,.1)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    transition: .5s;
+}
+
+.row-style h3 {
+    -webkit-box-reflect: below -20px -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(.2, transparent), to(rgba(3,3,3,.1)));
+}
+
+.row-style h1:hover {
+    background: -webkit-linear-gradient(top, rgba(70, 70, 70, 1) 0%,rgba(111, 111, 111, 1) 70%,rgba(10, 14, 10, 1) 71%,rgba(10, 8, 9, 1) 100%);
+    -webkit-box-reflect: below -2px -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(.4, transparent), to(rgba(3,3,3,.2)));  
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;   
+    -webkit-transform: translateY(-5px);
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    transition: .5s;
+}
+
+.name-content {
+    -webkit-transition: 500ms;
+    -moz-transition: 500ms;
+    transition: 500ms;
+    margin-bottom: 25px;
+    font-family: 'Optima','Songti SC','Verdana','Microsoft Yahei';
+    font-size: 52px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 1px 1px rgba(206, 206, 206,0.8),2px 2px rgba(206, 206, 206,0.8),3px 3px rgba(206, 206, 206,0.8),4px 4px rgba(206, 206, 206,0.8),5px 5px rgba(206, 206, 206,0.8),6px 6px rgba(206, 206, 206,0.8);
+}
+
+.name-content:hover {
+    -moz-transform: rotate(-5deg) scale(1.5,1.5);
+    -webkit-transform: rotate(-5deg) scale(1.5,1.5);
+    -o-transform: rotate(-5deg) scale(1.5,1.5);
+    -ms-transform: rotate(-5deg) scale(1.5,1.5);
+    transform: rotate(-5deg) scale(1.5,1.5);
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    transition: .5s;  
+}
+
+.contact-info {
+    font-family: "Times New Roman",Georgia,Serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: #BDBDBD;
+    margin-top:5px;
+}
+
+
+.block-left {
+    padding: 35px 10px 15px 10px;
 }

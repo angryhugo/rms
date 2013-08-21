@@ -25,9 +25,14 @@ module.exports = {
 
     showResumeList: function(req, res) {
         var userId = 1; ///////获取登录后的userId
-        dbHelper.showResumeList(userId, function(err, resumeList, existFlag) {
+        dbHelper.showResumeList(userId, function(err, user, resumeList, existFlag) {
             if (err) {
                 console.log(err);
+            } else {
+                res.render('resume-list', {
+                    resumeList: resumeList,
+                    user: user
+                });
             }
         });
     },

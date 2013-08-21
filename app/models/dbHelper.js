@@ -6,6 +6,23 @@ var Resume = entityFactory.Resume;
 var Education = entityFactory.Education;
 var Project = entityFactory.Project;
 
+
+exports.showResumeList = function(userId, callback) {
+	User.find(userId).success(function(user) {
+		Resume.findAll({
+			where: {
+				user_id: user.id
+			}
+		}).success(function(resumes) {
+			callback(null, user, resumes, true);
+		}).error(function(err) {
+			callback(err);
+		});
+	}).error(function(err) {
+		callback(err);
+	})
+};
+
 exports.showResumeInfo = function(id, callback) {
 	var allInfo = {};
 	Resume.find(id).success(function(resume) {
@@ -20,7 +37,7 @@ exports.showResumeInfo = function(id, callback) {
 						resume_id: resume.id
 					}
 				}).success(function(projects) {
-					allInfo.title = 'RMS';
+					allInfo.title = 'show resume info';
 					allInfo.resume = resume;
 					allInfo.projects = projects;
 					allInfo.educations = educations;
@@ -34,7 +51,7 @@ exports.showResumeInfo = function(id, callback) {
 		}
 	}).error(function(err) {
 		callback(err);
-	})
+	});
 };
 
 exports.editResumeBasic = function(id, newResume, callback) {
@@ -51,7 +68,7 @@ exports.editResumeBasic = function(id, newResume, callback) {
 		});
 	}).error(function(err) {
 		callback(err);
-	})
+	});
 };
 
 
@@ -67,7 +84,7 @@ exports.editEducation = function(id, newEducation, callback) {
 		});
 	}).error(function(err) {
 		callback(err);
-	})
+	});
 };
 
 exports.addEducation = function(resumeId, newEducation, callback) {
