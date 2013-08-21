@@ -28,7 +28,6 @@ $(function() {
 				email: true
 			},
 			age: "required",
-			gender: "required",
 			address: "required"
 		}
 	});

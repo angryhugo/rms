@@ -41,9 +41,15 @@ block main-content
                         div.span5
                             div.row
                                 div.span1
-                                    label(for='new-gender') Gender:
-                                div.span4
-                                    input#new-gender(type='text',size='22',name='gender')
+                                    | Gender:
+                                div.span1
+                                    label.radio
+                                        input(type='radio',name='genderRadios',value='男',checked)
+                                        | 男
+                                div.span1   
+                                    label.radio
+                                        input(type='radio',name='genderRadios',value='女')
+                                        | 女
                         div.span5.offset1
                             div.row
                                 div.span1

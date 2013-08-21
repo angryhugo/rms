@@ -127,9 +127,15 @@ block main-content
                 div.span5
                     div.row
                         div.span1
-                            label(for='edit-gender') Gender:
-                        div.span4
-                            input#edit-gender(type='text',size='22',name='gender')
+                            | Gender:
+                        div.span1
+                            label.radio
+                                input#genderRadios1(type='radio',name='genderRadios',value='男')
+                                | 男
+                        div.span1   
+                            label.radio
+                                input#genderRadios2(type='radio',name='genderRadios',value='女')
+                                | 女
                 div.span5
                     div.row
                         div.span1

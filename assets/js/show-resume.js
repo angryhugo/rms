@@ -48,7 +48,11 @@ $(function() {
     var showEditResume = function() {
         _editName.val(_resumeName.text());
         _editAge.val(_age.text());
-        _editGender.val(_gender.text());
+        if (_gender.text() == "男") {
+            $('#genderRadios1').attr("checked", true);
+        } else {
+            $('#genderRadios2').attr("checked", true);
+        }
         _editEmail.val(_email.text());
         _editAddress.val(_address.text());
         //$('#resume-index').val(_showEditResumeBtn.data('index'));
@@ -225,11 +229,11 @@ $(function() {
                 required: true,
                 email: true
             },
-            age: "required",
-            gender: "required",
+            age: {
+                required: true,
+                number: true
+            },
             address: "required"
         }
     });
-
-
 });

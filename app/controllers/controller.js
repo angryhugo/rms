@@ -99,7 +99,7 @@ module.exports = {
             name: req.body.resume_name || "",
             age: req.body.age || "",
             email: req.body.email || "",
-            gender: req.body.gender || "",
+            gender: req.body.genderRadios || "",
             address: req.body.address || ""
         };
         dbHelper.editResumeBasic(resumeId, newResume, function(err) {
@@ -224,7 +224,7 @@ function getNewResume(req, res) {
     var resume_name = req.body.resume_name || "";
     var email = req.body.email || "";
     var age = req.body.age || "";
-    var gender = req.body.gender || "";
+    var gender = req.body.genderRadios || "";
     var address = req.body.address || "";
 
     var newResumeBasic = {
