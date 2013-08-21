@@ -23,6 +23,29 @@ module.exports = {
         res.render('login');
     },
 
+    logout: function(req, res) {
+        //do something
+        res.redirect('/login');
+    },
+
+    showNewResumePage: function(req, res) {
+        res.render('new-resume', {
+            userId: 1
+        });
+    },
+
+    addNewResume: function(req, res) {
+        var userId = 1; ///////获取登录后的userId
+        var newResume = getNewResume(req, res);
+        dbHelper.addNewResume(userId, newResume, function(err) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.redirect('/resumes');
+            }
+        });
+    },
+
     showResumeList: function(req, res) {
         var userId = 1; ///////获取登录后的userId
         dbHelper.showResumeList(userId, function(err, user, resumeList, existFlag) {
@@ -54,6 +77,18 @@ module.exports = {
                 } else {
                     res.send('Resume do not exist!');
                 }
+            }
+        });
+    },
+
+    deleteResume: function(req, res) {
+        var resumeId = req.params.id || "";
+        dbHelper.deleteResume(resumeId, function(err) {
+            if (err) {
+                console.log(err);
+                res.send('Server error!');
+            } else {
+                res.send('Delete successfully!');
             }
         });
     },
@@ -183,4 +218,47 @@ function getNewProject(req, res) {
         description: description,
     };
     return newProject;
+};
+
+function getNewResume(req, res) {
+    var resume_name = req.body.resume_name || "";
+    var email = req.body.email || "";
+    var age = req.body.age || "";
+    var gender = req.body.gender || "";
+    var address = req.body.address || "";
+
+    var newResumeBasic = {
+        name: resume_name,
+        email: email,
+        age: age,
+        gender: gender,
+        address: address
+    };
+
+    var company = req.body.company || "";
+    var companyPeriodFrom = req.body.company_period_from || "";
+    var companyPeriodTo = req.body.company_period_to || "";
+    var description = req.body.company_description || "";
+    var newProject = {
+        company: company,
+        range: companyPeriodFrom + "-" + companyPeriodTo,
+        description: description,
+    };
+
+    var university = req.body.university || "";
+    var universityPeriodFrom = req.body.university_period_from || "";
+    var universityPeriodTo = req.body.university_period_to || "";
+    var major = req.body.university_major || "";
+    var newEducation = {
+        school: university,
+        range: universityPeriodFrom + "-" + universityPeriodTo,
+        major: major,
+    };
+
+    var newResume = {
+        basicInfo: newResumeBasic,
+        project: newProject,
+        education: newEducation
+    };
+    return newResume;
 }

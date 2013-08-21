@@ -78,15 +78,16 @@ html
                             li#menu-item-index
                                 a(href='/resumes') Index
                             li#menu-item-show-resume
-                                a(href='/resumes/1') Show Resume
+                                a Show Resume
                             li#menu-item-new-resume
                                 a(href='/resumes/new') New Resume
                             li#menu-item-logout
-                                a(href='/logout') Login out
+                                a#logout Login out
 
         block main-content
 
         script(type='text/javascript', src='/assets/vendor/jquery/jquery-1.9.1.js')
         script(type='text/javascript', src='/assets/vendor/bootstrap/js/bootstrap.js')
+        script(type='text/javascript', src='/assets/js/layout.js')
         block scripts
         | <!--<![endif]-->

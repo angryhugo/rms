@@ -71,6 +71,27 @@ exports.editResumeBasic = function(id, newResume, callback) {
 	});
 };
 
+exports.deleteResume = function(resumeId, callback) {
+	Resume.destroy({
+		id: resumeId
+	}).success(function() {
+		Education.destroy({
+			resume_id: resumeId
+		}).success(function() {
+			Project.destroy({
+				resume_id: resumeId
+			}).success(function() {
+				callback(null);
+			}).error(function(err) {
+				callback(err);
+			});
+		}).error(function(err) {
+			callback(err);
+		});
+	}).error(function(err) {
+		callback(err);
+	});
+};
 
 exports.editEducation = function(id, newEducation, callback) {
 	Education.find(id).success(function(education) {
@@ -144,6 +165,39 @@ exports.deleteProject = function(project_id, callback) {
 	Project.find(project_id).success(function(project) {
 		project.destroy().success(function(pro) {
 			callback(null);
+		}).error(function(err) {
+			callback(err);
+		});
+	}).error(function(err) {
+		callback(err);
+	});
+};
+
+exports.addNewResume = function(userId, newResume, callback) {
+	Resume.create({
+		name: newResume.basicInfo.name,
+		email: newResume.basicInfo.email,
+		age: newResume.basicInfo.age,
+		gender: newResume.basicInfo.gender,
+		address: newResume.basicInfo.address,
+		user_id: userId
+	}).success(function(resume) {
+		Education.create({
+			range: newResume.education.range,
+			school: newResume.education.school,
+			major: newResume.education.major,
+			resume_id: resume.id
+		}).success(function(education) {
+			Project.create({
+				range: newResume.project.range,
+				company: newResume.project.company,
+				description: newResume.project.description,
+				resume_id: resume.id
+			}).success(function(project) {
+				callback(null);
+			}).error(function(err) {
+				callback(err);
+			});
 		}).error(function(err) {
 			callback(err);
 		});

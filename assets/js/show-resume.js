@@ -144,13 +144,13 @@ $(function() {
                     alert(data);
                     var thisList = $('#project-list' + index);
                     var thisTab = $('#tab' + index);
-                    // if (thisList.hasNext()) {
-                    //     thisList.next().addClass('active');
-                    //     thisTab.next().addClass('active');
-                    // } else {
-                    //     thisList.prev().addClass('active');
-                    //     thisTab.prev().addClass('active');
-                    // }
+                    if (thisList.next()) {
+                        thisList.next().addClass('active');
+                        thisTab.next().addClass('active');
+                    } else if (thisList.prev()) {
+                        thisList.prev().addClass('active');
+                        thisTab.prev().addClass('active');
+                    }
                     thisList.remove();
                     thisTab.remove();
                 },

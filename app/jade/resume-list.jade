@@ -3,7 +3,7 @@ extends layout
 block title
     | resume list
 append head
-    link(rel='stylesheet', href='/static/css/resume-list.css')
+    //- link(rel='stylesheet', href='/static/css/resume-list.css')
 block main-content
     article.container
             section.row.row-style.row-padding-bottom
@@ -24,13 +24,13 @@ block main-content
                                 | Resume List
                         div.span4
                             div.span2.offset2
-                                button#btn-show-add-resume.btn.btn-color(data-index='#{user.id}', type='button') 添加
+                                button#btn-add-resume.btn.btn-color(data-index='#{user.id}', type='button') 添加
 
                 if resumeList.length > 0
                     div.span12
                         div.span3
                             h3
-                                | Resume Name
+                                | Name
                         div.span3
                             h3
                                 | Email
@@ -51,5 +51,5 @@ block main-content
                                     button.btn.btn-delete-resume.btn-color(type='button', data-index='#{resumeList[i].id}') 删除
 
 
-    block scripts
-        script(type='text/javascript', src='/assets/js/resume-list.js')
+block scripts
+    script(type='text/javascript', src='/assets/js/resume-list.js')

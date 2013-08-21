@@ -6,9 +6,18 @@ module.exports = function(app) {
     app.get('/resumes', controller.showResumeList);
     app.get('/login', controller.login);
 
-    app.get('/resumes/:id', controller.viewResume);
+    app.post('/logout', controller.logout);
 
+
+    app.get('/resumes/new', controller.showNewResumePage);
+    app.post('/resumes/new', controller.addNewResume);
+
+    app.get('/resumes/:id', controller.viewResume);
     app.post('/resumes/:id', controller.editResumeBasic);
+    app.delete('/resumes/:id', controller.deleteResume);
+
+
+
     app.post('/resumes/:resume_id/education/new', controller.addEducation);
     app.post('/resumes/:resume_id/education/:id', controller.editEducation);
     app.delete('/resumes/:resume_id/education/:id', controller.deleteEducation);
