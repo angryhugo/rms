@@ -1,14 +1,14 @@
 body {
     padding-top: 40px;
     padding-bottom: 40px;
-    background-color: #f5f5f5;
+    background-color: #A3A3A3;
 }
 
 .form-signin {
     max-width: 300px;
     padding: 19px 29px 29px;
     margin: 0 auto 20px;
-    background-color: #fff;
+    background-color: #ddd;
     border: 1px solid #e5e5e5;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -24,7 +24,7 @@ body {
 .form-signin input[type="text"],
 .form-signin input[type="password"] {
     font-size: 16px;
-    height: auto;
+    /*height: auto;*/
     margin-bottom: 15px;
     padding: 7px 9px;
 }

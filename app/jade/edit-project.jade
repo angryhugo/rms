@@ -1,0 +1,44 @@
+div#edit-project.modal.hide.fade
+        div.modal-header
+            button.close(type='button',data-dismiss='modal',aria-hidden='true') &times;
+            h3
+                | edit project
+        div.modal-body
+            form#edit-project-form(action='/resumes/#{resume.id}/projects/', method='POST')
+                input#project-list-index(type='hidden', name='edit_index', value='')
+                div.span5
+                    div.row
+                        div.span1
+                            label(for='edit-company') Company:
+                        div.span4.controls
+                            div.input-prepend
+                                span.add-on
+                                    i.icon-home
+                                input#edit-company(type='text',name='edit_company')
+                div.span5
+                    div.row
+                        div.span1
+                            label(for='edit-company-period-from') From:
+                        div.span4.controls
+                            div.input-prepend
+                                span.add-on
+                                    i.icon-calendar
+                                input#edit-company-period-from.form_datetime(type='text',name='edit_company_period_from',readonly)
+                div.span5
+                    div.row
+                        div.span1
+                            label(for='edit-company-period-to') To:
+                        div.span4.controls
+                            div.input-prepend
+                                span.add-on
+                                    i.icon-calendar
+                                input#edit-company-period-to.form_datetime(type='text',name='edit_company_period_to',readonly)
+                div.span5
+                    div.row
+                        div.span1
+                            label(for='edit-company-description') Description:
+                        div.span4
+                            textarea#edit-company-description(type='text',name='edit_company_description',rows='5',style='width:310px')
+        div.modal-footer
+            button.btn(data-dismiss='modal',aria-hidden='true') 关闭
+            button#btn-edit-project-submit.btn.btn-primary(data-dismiss='modal') 保存

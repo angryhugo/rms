@@ -3,29 +3,32 @@ var path = require('path');
 var dbHelper = require('../models/dbHelper');
 
 module.exports = {
-    index: function(req, res) {
-        dbHelper.showResumeInfo(1, function(err, allInfo) {
-            if (err) {
-                console.log(err);
-                res.send('Server error!');
-            } else {
-                res.render('index1', {
-                    title: allInfo.title,
-                    resume: allInfo.resume,
-                    projectList: allInfo.projects,
-                    educationList: allInfo.educations
-                });
-            }
-        });
-    },
-
     login: function(req, res) {
         res.render('login');
     },
 
+    // loginHandle: function(req, res) {
+    //     var email = req.body.email || "";
+    //     var password = req.body.password || "";
+    //     dbHelper.login(email, password, function(err, userId) {
+    //         if (err) {
+    //             console.log(err);
+    //             res.send('Server error!');
+    //         } else {
+    //             if (userId) {
+    //                 req.session.userId = userId;
+    //                 res.redirect('/resumes');
+    //             } else {
+    //                 res.redirect('/login');
+    //             }
+    //         }
+    //     });
+    // },
+
     loginHandle: function(req, res) {
         var email = req.body.email || "";
         var password = req.body.password || "";
+        var existFlag = false;
         dbHelper.login(email, password, function(err, userId) {
             if (err) {
                 console.log(err);
@@ -33,18 +36,19 @@ module.exports = {
             } else {
                 if (userId) {
                     req.session.userId = userId;
-                    res.redirect('/resumes');
+                    existFlag = true;
+                    res.send(existFlag);
                 } else {
-                    res.redirect('/login');
+                    res.send(existFlag);
                 }
             }
         });
     },
 
     logout: function(req, res) {
-        //do something
         req.session.userId = 0;
-        res.redirect('/login');
+        res.send('logout successfully!');
+        //res.redirect('/login');//使用ajax后这条语句不会执行
     },
 
     showNewResumePage: function(req, res) {

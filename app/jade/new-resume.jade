@@ -24,38 +24,52 @@ block main-content
                             div.row
                                 div.span1
                                     label(for='new-name') Name:
-                                div.span4
-                                    input#new-name(type='text',size='22',name='resume_name')
+                                div.span4.controls
+                                    div.input-prepend
+                                        span.add-on
+                                            i.icon-edit
+                                        input#new-name(type='text',size='22',name='resume_name')
                         div.span5
                             div.row
                                 div.span1
                                     label(for='new-email') Email:
-                                div.span4
-                                    input#new-email(type='text',size='22',name='email')
+                                div.span4.controls
+                                    div.input-prepend
+                                        span.add-on
+                                            i.icon-envelope
+                                        input#new-email(type='text',size='22',name='email')
                         div.span5.offset1
                             div.row
                                 div.span1
                                     label(for='new-age') Age:
-                                div.span4
-                                    input#new-age(type='text',size='22',name='age')
+                                div.span4.controls
+                                    div.input-prepend
+                                        span.add-on
+                                            i.icon-edit
+                                        input#new-age(type='text',size='22',name='age')
                         div.span5
                             div.row
                                 div.span1
-                                    | Gender:
-                                div.span1
-                                    label.radio
-                                        input(type='radio',name='genderRadios',value='男',checked)
-                                        | 男
-                                div.span1   
-                                    label.radio
-                                        input(type='radio',name='genderRadios',value='女')
-                                        | 女
+                                    label(for='new-address') Address:
+                                div.span4.controls
+                                    div.input-prepend
+                                        span.add-on
+                                            i.icon-home
+                                        input#new-address(type='text',size='22',name='address')
+                            
                         div.span5.offset1
                             div.row
                                 div.span1
-                                    label(for='new-address') Address:
-                                div.span4
-                                    input#new-address(type='text',size='22',name='address')
+                                    | Gender:
+                                div.span1.radio-width
+                                    label.radio
+                                        input(type='radio',name='genderRadios',value='男',checked)
+                                        | 男
+                                div.span1.radio-width.next-radio
+                                    label.radio
+                                        input(type='radio',name='genderRadios',value='女')
+                                        | 女
+
                         div.span4.offset4.margin-btm
                             h1 
                                 | Education
@@ -63,25 +77,37 @@ block main-content
                             div.row
                                 div.span1
                                     label(for='new-university') University:
-                                div.span4
-                                    input#new-university(type='text',name='university')
+                                div.span4.controls
+                                    div.input-prepend
+                                        span.add-on
+                                            i.icon-home
+                                        input#new-university(type='text',name='university')
                         div.span5
                             div.row
                                 div.span1
                                     label(for='new-university-major') Major:
-                                div.span4
-                                    input#new-university-major(type='text',name='university_major')
+                                div.span4.controls
+                                    div.input-prepend
+                                        span.add-on
+                                            i.icon-thumbs-up
+                                        input#new-university-major(type='text',name='university_major')
                         div.span5.offset1
                             div.row
                                 div.span1
                                     label(for='new-university-period-from') From:
-                                div.span4
-                                    input#new-university-period-from.form_datetime(type='text',name='university_period_from',readonly)
+                                div.span4.controls
+                                    div.input-prepend
+                                        span.add-on
+                                            i.icon-calendar
+                                        input#new-university-period-from.form_datetime(type='text',name='university_period_from',readonly)
                         div.span5
                             div.row
                                 div.span1
                                     label(for='new-university-period-to') To:
-                                div.span4
+                                div.span4.controls
+                                    div.input-prepend
+                                        span.add-on
+                                            i.icon-calendar
                                     input#new-university-period-to.form_datetime(type='text',name='university_period_to',readonly)
 
                         div.span4.offset4.margin-btm
@@ -91,24 +117,33 @@ block main-content
                             div.row
                                 div.span1
                                     label(for='new-company') Company:
-                                div.span4
-                                    input#new-company(type='text',name='company')
+                                div.span4.controls
+                                    div.input-prepend
+                                        span.add-on
+                                            i.icon-home
+                                        input#new-company(type='text',name='company')
                         div.span5.offset1
                             div.row
                                 div.span1
                                     label(for='new-company-period-from') From:
-                                div.span4
-                                    input#new-company-period-from.form_datetime(type='text',name='company_period_from',readonly)
+                                div.span4.controls
+                                    div.input-prepend
+                                        span.add-on
+                                            i.icon-calendar
+                                        input#new-company-period-from.form_datetime(type='text',name='company_period_from',readonly)
                         div.span5
                             div.row
                                 div.span1
                                     label(for='new-company-period-to') To:
-                                div.span4
-                                    input#new-company-period-to.form_datetime(type='text',name='company_period_to',readonly)
+                                div.span4.controls
+                                    div.input-prepend
+                                        span.add-on
+                                            i.icon-calendar
+                                        input#new-company-period-to.form_datetime(type='text',name='company_period_to',readonly)
                         div.span10.offset1
                             div.row
                                 div.span1
                                     label(for='new-company-description') Description:
                                 div.span8
-                                    textarea#new-company-description(type='text',name='company_description',rows="5",style="width:706px")
+                                    textarea#new-company-description(type='text',name='company_description',rows="5",style="width:733px")
                         button#btn-new-resume-submit.btn.btn-primary 保存

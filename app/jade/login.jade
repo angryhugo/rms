@@ -10,19 +10,29 @@ html
         meta(name='viewport',content='width=device-width, initial-scale=1.0')
         link(rel='stylesheet',href='/assets/vendor/bootstrap/css/bootstrap.css')
         link(rel='stylesheet',href='/static/css/login.css')
+        link(rel='stylesheet',href='/assets/vendor/font-awesome/css/font-awesome.css')
         title
             | login
     body
         div.container
-            form.form-signin(method="POST", action="/login")
+            div#login-form.form-signin
                 h2.form-signin-heading
                     | Please sign in
-                input.input-block-level(type='text',placeholder='Email',name="email")
-                input.input-block-level(type='password',placeholder='Password',name="password")
+                div.controls
+                        div.input-prepend
+                            span.add-on
+                                i.icon-envelope
+                            input#input-email.input-block-level(type='text',placeholder='Email',name="email")
+                div.controls
+                        div.input-prepend
+                            span.add-on
+                                i.icon-lock
+                            input#input-password.input-block-level(type='password',placeholder='Password',name="password")
                 label.checkbox
                     input(type='checkbox',value='remember-me') 
                     | Remember me
-                button.btn.btn-large.btn-primary(type='submit')
+                button#btn-login.btn.btn-large.btn-primary
                     | Sign in
         script(type='text/javascript', src='/assets/vendor/jquery/jquery-1.9.1.js')
         script(type='text/javascript', src='/assets/vendor/bootstrap/js/bootstrap.js')
+        script(type='text/javascript', src='/assets/js/login.js')

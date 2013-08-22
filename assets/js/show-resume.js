@@ -1,7 +1,10 @@
 $(function() {
     $(".form_datetime").datetimepicker({
         format: 'MM yyyy',
-        autoclose: true
+        autoclose: true,
+        startView: 3, //star年试图（月份）
+        minView: 3, //最小年试图（月份）
+        maxView: 4 //最大十年试图（年份）
     });
     var _showResumeMenu = $('#menu-item-show-resume')
     var _editProfile = $('#edit-profile');

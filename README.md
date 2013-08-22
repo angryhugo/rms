@@ -14,8 +14,10 @@
 /resumes/:id                          POST          edit resume base information
 /resumes/:resume_id/projects/new      POST          handle adding new project
 /resumes/:resume_id/projects/:id      POST          handle project editting
+/resumes/:resume_id/projects/:id      DELETE        handle deleting project record
 /resumes/:resume_id/education/new     POST          handle adding new education record
 /resumes/:resume_id/education/:id     POST          handle education record editting
+/resumes/:resume_id/education/:id     DELETE        handle deleting education record
 ```
 
 
