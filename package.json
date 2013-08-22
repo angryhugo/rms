@@ -7,7 +7,7 @@
         "express": "*",
         "less-middleware": "*",
         "jade": "*",
-	"sequelize": "*",
+        "sequelize": "*",
         "mysql": "*",
         "password-hash": "*",
         "passport": "*"

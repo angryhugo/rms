@@ -42,8 +42,8 @@ $(function() {
     var _resumeId = $('#resume-id').text();
 
     _showResumeMenu.addClass('active');
-    $('#tab1').addClass('active');
-    $('#project-list1').addClass('active');
+    $('.tabbable ul li:nth-child(1)').addClass('active'); //nth-child(1)与first-child等价
+    $('.tab-content div:first-child').addClass('active'); //‘ul li:nth-child(1)’指ul下第一个li
 
     var showEditResume = function() {
         _editName.val(_resumeName.text());
@@ -148,13 +148,8 @@ $(function() {
                     alert(data);
                     var thisList = $('#project-list' + index);
                     var thisTab = $('#tab' + index);
-                    if (thisList.next()) {
-                        thisList.next().addClass('active');
-                        thisTab.next().addClass('active');
-                    } else if (thisList.prev()) {
-                        thisList.prev().addClass('active');
-                        thisTab.prev().addClass('active');
-                    }
+                    $('.tabbable ul li:nth-child(1)').addClass('active');
+                    $('.tab-content div:first-child').addClass('active');
                     thisList.remove();
                     thisTab.remove();
                 },
