@@ -1,6 +1,7 @@
 $(function() {
 	var _loginForm = $('#login-form');
 	var _loginBtn = $('#btn-login');
+	var _signUpBtn = $('#btn-sign-up');
 
 	_loginBtn.on('click', function() {
 		$.ajax({
@@ -24,13 +25,17 @@ $(function() {
 		});
 	});
 
-	_loginForm.validate({
-		rules: {
-			email: {
-				required: true,
-				email: true
-			},
-			password: "required"
-		}
+	// _loginForm.validate({
+	// 	rules: {
+	// 		email: {
+	// 			required: true,
+	// 			email: true
+	// 		},
+	// 		password: "required"
+	// 	}
+	// });
+
+	_signUpBtn.on('click', function() {
+		window.location.href = '/sign_up';
 	});
 });

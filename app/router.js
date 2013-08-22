@@ -6,6 +6,8 @@ module.exports = function(app) {
     app.get('/login', controller.login);
     app.post('/login', controller.loginHandle);
 
+    app.get('/sign_up', controller.signUp);
+
     app.post('/logout', controller.logout);
 
     app.get('/resumes', controller.showResumeList);

@@ -12,12 +12,12 @@ html
         link(rel='stylesheet',href='/static/css/login.css')
         link(rel='stylesheet',href='/assets/vendor/font-awesome/css/font-awesome.css')
         title
-            | login
+            | sign up
     body
         div.container
-            div#login-form.form-signin
+            form#sign-up-form.form-signin
                 h2.form-signin-heading
-                    | Please sign in
+                    | Please sign up
                 div.controls
                         div.input-prepend
                             span.add-on
@@ -26,15 +26,21 @@ html
                 div.controls
                         div.input-prepend
                             span.add-on
+                                i.icon-envelope
+                            input#input-name.input-block-level(type='text',placeholder='Name',name="name")
+                div.controls
+                        div.input-prepend
+                            span.add-on
                                 i.icon-lock
-                            input#input-password.input-block-level(type='password',placeholder='Password',name="password")
-                label.checkbox
-                    input(type='checkbox',value='remember-me') 
-                    | Remember me
-                button#btn-login.btn.btn-large.btn-primary
-                    | Sign in
+                            input#input-password1.input-block-level(type='password',placeholder='Password',name="password1")
+                div.controls
+                        div.input-prepend
+                            span.add-on
+                                i.icon-lock
+                            input#input-password2.input-block-level(type='password',placeholder='Password Again',name="password2")
                 button#btn-sign-up.btn.btn-large.btn-primary
                     | Sign up
+                button#btn-login.btn.btn-large.btn-primary
+                    | Login
         script(type='text/javascript', src='/assets/vendor/jquery/jquery-1.9.1.js')
         script(type='text/javascript', src='/assets/vendor/bootstrap/js/bootstrap.js')
-        script(type='text/javascript', src='/assets/js/login.js')

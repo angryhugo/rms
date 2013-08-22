@@ -7,6 +7,10 @@ module.exports = {
         res.render('login');
     },
 
+    signUp: function(req, res) {
+        res.render('sign-up');
+    },
+
     // loginHandle: function(req, res) {
     //     var email = req.body.email || "";
     //     var password = req.body.password || "";
