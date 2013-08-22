@@ -23,19 +23,42 @@ module.exports = {
         res.render('login');
     },
 
+    loginHandle: function(req, res) {
+        var email = req.body.email || "";
+        var password = req.body.password || "";
+        dbHelper.login(email, password, function(err, userId) {
+            if (err) {
+                console.log(err);
+                res.send('Server error!');
+            } else {
+                if (userId) {
+                    req.session.userId = userId;
+                    res.redirect('/resumes');
+                } else {
+                    res.redirect('/login');
+                }
+            }
+        });
+    },
+
     logout: function(req, res) {
         //do something
+        req.session.userId = 0;
         res.redirect('/login');
     },
 
     showNewResumePage: function(req, res) {
-        res.render('new-resume', {
-            userId: 1
-        });
+        if (req.session.userId) {
+            res.render('new-resume', {
+                userId: req.session.userId
+            });
+        } else {
+            res.redirect('/login');
+        }
     },
 
     addNewResume: function(req, res) {
-        var userId = 1; ///////获取登录后的userId
+        var userId = req.session.userId; //获取登录后的userId
         var newResume = getNewResume(req, res);
         dbHelper.addNewResume(userId, newResume, function(err) {
             if (err) {
@@ -47,38 +70,47 @@ module.exports = {
     },
 
     showResumeList: function(req, res) {
-        var userId = 1; ///////获取登录后的userId
-        dbHelper.showResumeList(userId, function(err, user, resumeList, existFlag) {
-            if (err) {
-                console.log(err);
-            } else {
-                res.render('resume-list', {
-                    resumeList: resumeList,
-                    user: user
-                });
-            }
-        });
+        if (req.session.userId) {
+            dbHelper.showResumeList(req.session.userId, function(err, user, resumeList, existFlag) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.render('resume-list', {
+                        resumeList: resumeList,
+                        user: user
+                    });
+                }
+            });
+        } else {
+            res.redirect('/login');
+        }
     },
 
     viewResume: function(req, res) {
-        var resumeId = req.params.id || "";
-        dbHelper.showResumeInfo(resumeId, function(err, allInfo, existFlag) {
-            if (err) {
-                console.log(err);
-                res.send('Server error!');
-            } else {
-                if (existFlag) {
-                    res.render('show-resume', {
-                        title: allInfo.title,
-                        resume: allInfo.resume,
-                        projectList: allInfo.projects,
-                        educationList: allInfo.educations
-                    });
+        if (req.session.userId) {
+            var userId = req.session.userId;
+            var resumeId = req.params.id || "";
+            dbHelper.showResumeInfo(userId, resumeId, function(err, allInfo, existFlag) {
+                if (err) {
+                    console.log(err);
+                    res.send('Server error!');
                 } else {
-                    res.send('Resume do not exist!');
+                    if (existFlag) {
+                        res.render('show-resume', {
+                            title: allInfo.title,
+                            user: allInfo.user,
+                            resume: allInfo.resume,
+                            projectList: allInfo.projects,
+                            educationList: allInfo.educations
+                        });
+                    } else {
+                        res.send('Resume do not exist!');
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            res.redirect('/login');
+        }
     },
 
     deleteResume: function(req, res) {

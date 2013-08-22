@@ -6,6 +6,22 @@ var Resume = entityFactory.Resume;
 var Education = entityFactory.Education;
 var Project = entityFactory.Project;
 
+exports.login = function(email, password, callback) {
+	User.findAll({
+		where: {
+			email: email,
+			password: password
+		}
+	}).success(function(user) {
+		if (user.length) {
+			callback(null, user[0].id);
+		} else {
+			callback(null, 0);
+		}
+	}).error(function(err) {
+		callback(err);
+	})
+};
 
 exports.showResumeList = function(userId, callback) {
 	User.find(userId).success(function(user) {
@@ -23,32 +39,37 @@ exports.showResumeList = function(userId, callback) {
 	})
 };
 
-exports.showResumeInfo = function(id, callback) {
+exports.showResumeInfo = function(userId, resumeId, callback) {
 	var allInfo = {};
-	Resume.find(id).success(function(resume) {
-		if (!resume) {
-			callback(null, allInfo, false);
-		} else {
-			Education.findAll({
-				where: ["resume_id = ?", resume.id]
-			}).success(function(educations) {
-				Project.findAll({
-					where: {
-						resume_id: resume.id
-					}
-				}).success(function(projects) {
-					allInfo.title = 'show resume info';
-					allInfo.resume = resume;
-					allInfo.projects = projects;
-					allInfo.educations = educations;
-					callback(null, allInfo, true);
+	User.find(userId).success(function(user) {
+		Resume.find(resumeId).success(function(resume) {
+			if (!resume || resume.user_id != userId) { //简历不存在或者简历不是该用户的
+				callback(null, allInfo, false);
+			} else {
+				Education.findAll({
+					where: ["resume_id = ?", resume.id]
+				}).success(function(educations) {
+					Project.findAll({
+						where: {
+							resume_id: resume.id
+						}
+					}).success(function(projects) {
+						allInfo.title = 'show resume info';
+						allInfo.user = user;
+						allInfo.resume = resume;
+						allInfo.projects = projects;
+						allInfo.educations = educations;
+						callback(null, allInfo, true);
+					}).error(function(err) {
+						callback(err);
+					});
 				}).error(function(err) {
 					callback(err);
 				});
-			}).error(function(err) {
-				callback(err);
-			});
-		}
+			}
+		}).error(function(err) {
+			callback(err);
+		});
 	}).error(function(err) {
 		callback(err);
 	});

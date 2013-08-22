@@ -14,11 +14,11 @@ html
             | login
     body
         div.container
-            form.form-signin(id="", method="", action="")
+            form.form-signin(method="POST", action="/login")
                 h2.form-signin-heading
                     | Please sign in
-                input.input-block-level(type='text',placeholder='Username')
-                input.input-block-level(type='password',placeholder='Password')
+                input.input-block-level(type='text',placeholder='Email',name="email")
+                input.input-block-level(type='password',placeholder='Password',name="password")
                 label.checkbox
                     input(type='checkbox',value='remember-me') 
                     | Remember me
