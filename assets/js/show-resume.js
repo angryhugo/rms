@@ -233,4 +233,22 @@ $(function() {
             address: "required"
         }
     });
+
+    _editProjectForm.validate({
+        rules: {
+            edit_company: "required",
+            edit_company_period_from: "required",
+            edit_company_period_to: "required",
+            edit_company_description: "required"
+        }
+    });
+
+    _editEducationForm.validate({
+        rules: {
+            edit_university: "required",
+            edit_university_period_from: "required",
+            edit_university_period_to: "required",
+            edit_university_major: "required"
+        }
+    });
 });
