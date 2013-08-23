@@ -4,14 +4,19 @@ var dbHelper = require('../models/dbHelper');
 
 module.exports = {
     login: function(req, res) {
-        var message = req.session.message || '';
+        var messageLogin = req.session.messageLogin || '';
+        req.session.messageLogin = '';
         res.render('login', {
-            message: message
+            messageLogin: messageLogin
         });
     },
 
     signUp: function(req, res) {
-        res.render('sign-up');
+        var messageSignUp = req.session.messageSignUp || '';
+        req.session.messageSignUp = '';
+        res.render('sign-up', {
+            messageSignUp: messageSignUp
+        });
     },
 
     loginHandle: function(req, res) {
@@ -27,6 +32,7 @@ module.exports = {
                     req.session.userEmail = user.email;
                     res.redirect('/resumes');
                 } else {
+                    req.session.messageLogin = '帐号密码错误！';
                     res.redirect('/account/login');
                 }
             }
@@ -41,6 +47,7 @@ module.exports = {
             if (err) {
                 console.log(err);
                 //email唯一，导致错误
+                req.session.messageSignUp = 'email已存在！';
                 res.redirect('/account/sign_up');
             } else {
                 if (userId) {
@@ -83,8 +90,11 @@ module.exports = {
 
     changePassword: function(req, res) {
         if (req.session.userId) {
+            var messagePassword = req.session.messagePassword || '';
+            req.session.messagePassword = '';
             res.render('password', {
-                email: req.session.userEmail
+                email: req.session.userEmail,
+                messagePassword: messagePassword
             });
         } else {
             res.redirect('/account/login');
@@ -102,7 +112,7 @@ module.exports = {
                 if (oldPasswordRight) {
                     res.redirect('/resumes');
                 } else {
-                    //旧密码不正确
+                    req.session.messagePassword = "旧密码错误！";
                     res.redirect('/account/password');
                 }
             }

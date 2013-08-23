@@ -28,6 +28,12 @@ block main-content
                         span.add-on
                             i.icon-lock
                         input#input-password2.input-block-level(type='password',placeholder='Password Again',name="password2")
+            if (messageSignUp!=='')
+                div.alert.alert-error.error-message
+                    button.close(data-dismiss='alert')
+                        &times;
+                    strong
+                        | #{messageSignUp}
             button#btn-sign-up.btn.btn-success(type='submit')
                 | Sign up
             button#btn-login.btn.right-button
