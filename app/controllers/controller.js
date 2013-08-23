@@ -14,16 +14,17 @@ module.exports = {
     loginHandle: function(req, res) {
         var email = req.body.email || "";
         var password = req.body.password || "";
-        dbHelper.login(email, password, function(err, userId) {
+        dbHelper.login(email, password, function(err, user) {
             if (err) {
                 console.log(err);
                 res.send('Server error!');
             } else {
-                if (userId) {
-                    req.session.userId = userId;
+                if (user) {
+                    req.session.userId = user.id;
+                    req.session.userEmail = user.email;
                     res.redirect('/resumes');
                 } else {
-                    res.redirect('/login');
+                    res.redirect('/account/login');
                 }
             }
         });
@@ -37,13 +38,13 @@ module.exports = {
             if (err) {
                 console.log(err);
                 //email唯一，导致错误
-                res.redirect('/sign_up');
+                res.redirect('/account/sign_up');
             } else {
                 if (userId) {
                     req.session.userId = userId;
                     res.redirect('/resumes');
                 } else {
-                    res.redirect('/sign_up');
+                    res.redirect('/account/sign_up');
                 }
             }
         });
@@ -72,8 +73,37 @@ module.exports = {
 
     logout: function(req, res) {
         req.session.userId = 0;
+        req.session.userEmail = "";
         res.send('logout successfully!');
         //res.redirect('/login');//使用ajax后这条语句不会执行
+    },
+
+    changePassword: function(req, res) {
+        if (req.session.userId) {
+            res.render('password', {
+                email: req.session.userEmail
+            });
+        } else {
+            res.redirect('/account/login');
+        }
+    },
+
+    changePasswordHandle: function(req, res) {
+        var oldPassword = req.body.old_password || "";
+        var newPassword = req.body.password1 || "";
+        dbHelper.changePassword(req.session.userId, oldPassword, newPassword, function(err, oldPasswordRight) {
+            if (err) {
+                console.log(err);
+                res.send('Server error!');
+            } else {
+                if (oldPasswordRight) {
+                    res.redirect('/resumes');
+                } else {
+                    //旧密码不正确
+                    res.redirect('/account/password');
+                }
+            }
+        });
     },
 
     showNewResumePage: function(req, res) {
@@ -82,7 +112,7 @@ module.exports = {
                 userId: req.session.userId
             });
         } else {
-            res.redirect('/login');
+            res.redirect('/account/login');
         }
     },
 
@@ -111,7 +141,7 @@ module.exports = {
                 }
             });
         } else {
-            res.redirect('/login');
+            res.redirect('/account/login');
         }
     },
 
@@ -138,7 +168,7 @@ module.exports = {
                 }
             });
         } else {
-            res.redirect('/login');
+            res.redirect('/account/login');
         }
     },
 

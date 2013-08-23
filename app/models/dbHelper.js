@@ -15,7 +15,7 @@ exports.login = function(email, password, callback) {
 	}).success(function(user) {
 		if (user) {
 			if (passwordHash.verify(password, user.password)) {
-				callback(null, user.id);
+				callback(null, user);
 			} else {
 				callback(null, 0);
 			}
@@ -38,6 +38,23 @@ exports.signUp = function(email, password, name, callback) {
 	}).error(function(err) {
 		callback(err);
 	});
+},
+
+exports.changePassword = function(userId, oldPassword, newPassword, callback) {
+	User.find(userId).success(function(user) {
+		if (passwordHash.verify(oldPassword, user.password)) {
+			user.password = passwordHash.generate(newPassword);
+			user.save().success(function(user) {
+				callback(null, true);
+			}).error(function(err) {
+				callback(err);
+			});
+		} else {
+			callback(null, false);
+		}
+	}).error(function(err) {
+		callback(err);
+	})
 },
 
 exports.showResumeList = function(userId, callback) {

@@ -36,6 +36,6 @@ $(function() {
 	});
 
 	_signUpBtn.on('click', function() {
-		window.location.href = '/sign_up';
+		window.location.href = '/account/sign_up';
 	});
 });

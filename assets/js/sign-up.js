@@ -23,6 +23,6 @@ $(function() {
 	});
 
 	_loginBtn.on('click', function() {
-		window.location.href = '/login';
+		window.location.href = '/account/login';
 	});
 });

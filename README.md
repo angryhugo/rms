@@ -3,9 +3,13 @@
 ## RESTful route and features
 
 ```
-/login                                GET           login page
-/login                                POST          handle login request
-/logout                               POST          handle logout request
+/account/login                        GET           login page
+/account/login                        POST          handle login request
+/account/logout                       POST          handle logout request
+/account/sign_up                      GET           sign_up page
+/account/sign_up                      POST          handle sign_up request
+/account/password                     GET           password-changing page
+/account/password                     POST          handle password-changing request
 /resumes                              GET           resume list page
 /resumes/new                          GET           resume creation page
 /resumes/new                          POST          save new resume

@@ -3,13 +3,16 @@ var controller = require('./controllers/controller');
 module.exports = function(app) {
 
     app.get('/', controller.showResumeList);
-    app.get('/login', controller.login);
-    app.post('/login', controller.loginHandle);
+    app.get('/account/login', controller.login);
+    app.post('/account/login', controller.loginHandle);
 
-    app.get('/sign_up', controller.signUp);
-    app.post('/sign_up', controller.signUpHandle);
+    app.get('/account/sign_up', controller.signUp);
+    app.post('/account/sign_up', controller.signUpHandle);
 
-    app.post('/logout', controller.logout);
+    app.post('/account/logout', controller.logout);
+
+    app.get('/account/password', controller.changePassword);
+    app.post('/account/password', controller.changePasswordHandle);
 
     app.get('/resumes', controller.showResumeList);
     app.get('/resumes/new', controller.showNewResumePage);
