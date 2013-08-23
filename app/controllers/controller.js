@@ -4,7 +4,10 @@ var dbHelper = require('../models/dbHelper');
 
 module.exports = {
     login: function(req, res) {
-        res.render('login');
+        var message = req.session.message || '';
+        res.render('login', {
+            message: message
+        });
     },
 
     signUp: function(req, res) {

@@ -25,6 +25,9 @@ block main-content
                 | Sign in
             button#btn-sign-up.btn.right-button
                 | Sign up
+
+            if message !== ''
+                div= message
         
 block scripts
     script(type='text/javascript', src='/assets/js/login.js')
