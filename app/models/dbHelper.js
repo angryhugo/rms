@@ -1,4 +1,5 @@
 var entityFactory = require('./entityFactory');
+var passwordHash = require('password-hash');
 
 var sequelize = entityFactory.sequelize;
 var User = entityFactory.User;
@@ -7,14 +8,17 @@ var Education = entityFactory.Education;
 var Project = entityFactory.Project;
 
 exports.login = function(email, password, callback) {
-	User.findAll({
+	User.find({
 		where: {
 			email: email,
-			password: password
 		}
 	}).success(function(user) {
-		if (user.length) {
-			callback(null, user[0].id);
+		if (user) {
+			if (passwordHash.verify(password, user.password)) {
+				callback(null, user.id);
+			} else {
+				callback(null, 0);
+			}
 		} else {
 			callback(null, 0);
 		}
@@ -22,6 +26,19 @@ exports.login = function(email, password, callback) {
 		callback(err);
 	})
 };
+
+exports.signUp = function(email, password, name, callback) {
+	var hashedPassword = passwordHash.generate(password);
+	User.create({
+		name: name,
+		email: email,
+		password: hashedPassword
+	}).success(function(user) {
+		callback(null, user.id);
+	}).error(function(err) {
+		callback(err);
+	});
+},
 
 exports.showResumeList = function(userId, callback) {
 	User.find(userId).success(function(user) {

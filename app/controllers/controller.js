@@ -11,28 +11,9 @@ module.exports = {
         res.render('sign-up');
     },
 
-    // loginHandle: function(req, res) {
-    //     var email = req.body.email || "";
-    //     var password = req.body.password || "";
-    //     dbHelper.login(email, password, function(err, userId) {
-    //         if (err) {
-    //             console.log(err);
-    //             res.send('Server error!');
-    //         } else {
-    //             if (userId) {
-    //                 req.session.userId = userId;
-    //                 res.redirect('/resumes');
-    //             } else {
-    //                 res.redirect('/login');
-    //             }
-    //         }
-    //     });
-    // },
-
     loginHandle: function(req, res) {
         var email = req.body.email || "";
         var password = req.body.password || "";
-        var existFlag = false;
         dbHelper.login(email, password, function(err, userId) {
             if (err) {
                 console.log(err);
@@ -40,14 +21,54 @@ module.exports = {
             } else {
                 if (userId) {
                     req.session.userId = userId;
-                    existFlag = true;
-                    res.send(existFlag);
+                    res.redirect('/resumes');
                 } else {
-                    res.send(existFlag);
+                    res.redirect('/login');
                 }
             }
         });
     },
+
+    signUpHandle: function(req, res) {
+        var email = req.body.email || "";
+        var password = req.body.password1 || "";
+        var name = req.body.name || "";
+        dbHelper.signUp(email, password, name, function(err, userId) {
+            if (err) {
+                console.log(err);
+                //email唯一，导致错误
+                res.redirect('/sign_up');
+            } else {
+                if (userId) {
+                    req.session.userId = userId;
+                    res.redirect('/resumes');
+                } else {
+                    res.redirect('/sign_up');
+                }
+            }
+        });
+    },
+
+    // &.ajax
+    // loginHandle: function(req, res) {
+    //     var email = req.body.email || "";
+    //     var password = req.body.password || "";
+    //     var existFlag = false;
+    //     dbHelper.login(email, password, function(err, userId) {
+    //         if (err) {
+    //             console.log(err);
+    //             res.send('Server error!');
+    //         } else {
+    //             if (userId) {
+    //                 req.session.userId = userId;
+    //                 existFlag = true;
+    //                 res.send(existFlag);
+    //             } else {
+    //                 res.send(existFlag);
+    //             }
+    //         }
+    //     });
+    // },
 
     logout: function(req, res) {
         req.session.userId = 0;
@@ -112,7 +133,7 @@ module.exports = {
                             educationList: allInfo.educations
                         });
                     } else {
-                        res.send('Resume do not exist!');
+                        res.redirect('/resumes');
                     }
                 }
             });

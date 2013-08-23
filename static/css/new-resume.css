@@ -1,0 +1,13 @@
+label{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.gender{
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.label-margin-top{
+    margin-top: 5px;
+}

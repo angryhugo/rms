@@ -30,7 +30,12 @@ $(function() {
 				required: true,
 				email: true
 			},
-			age: "required",
+			age: {
+				required: true,
+				digits: true,
+				min: 1,
+				max: 120
+			},
 			address: "required"
 		}
 	});

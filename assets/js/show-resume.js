@@ -219,17 +219,16 @@ $(function() {
 
     _editResumeForm.validate({
         rules: {
-            resume_name: {
-                required: true,
-                minlength: 2
-            },
+            resume_name: "required",
             email: {
                 required: true,
                 email: true
             },
             age: {
                 required: true,
-                number: true
+                digits: true,
+                min: 1,
+                max: 120
             },
             address: "required"
         }

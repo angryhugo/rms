@@ -1,46 +1,37 @@
-doctype 5
-html
-    head
-        meta(http-equiv='content-type', content='text/html;charset=utf-8')
-        meta(http-equiv='X-UA-Compatible', content='IE=EmulateIE8, IE=8, IE=9')
-        meta(http-equiv='Pragma', content='no-cache')
-        meta(http-equiv='Cache-Control', content='no-cache')
-        meta(name='description',content='demo')
-        meta(http-equiv='keywords',content='HTML,resume Demo') 
-        meta(name='viewport',content='width=device-width, initial-scale=1.0')
-        link(rel='stylesheet',href='/assets/vendor/bootstrap/css/bootstrap.css')
-        link(rel='stylesheet',href='/static/css/login.css')
-        link(rel='stylesheet',href='/assets/vendor/font-awesome/css/font-awesome.css')
-        title
-            | sign up
-    body
-        div.container
-            form#sign-up-form.form-signin
-                h2.form-signin-heading
-                    | Please sign up
-                div.controls
-                        div.input-prepend
-                            span.add-on
-                                i.icon-envelope
-                            input#input-email.input-block-level(type='text',placeholder='Email',name="email")
-                div.controls
-                        div.input-prepend
-                            span.add-on
-                                i.icon-envelope
-                            input#input-name.input-block-level(type='text',placeholder='Name',name="name")
-                div.controls
-                        div.input-prepend
-                            span.add-on
-                                i.icon-lock
-                            input#input-password1.input-block-level(type='password',placeholder='Password',name="password1")
-                div.controls
-                        div.input-prepend
-                            span.add-on
-                                i.icon-lock
-                            input#input-password2.input-block-level(type='password',placeholder='Password Again',name="password2")
-                button#btn-sign-up.btn.btn-large.btn-primary
-                    | Sign up
-                button#btn-login.btn.btn-large.btn-primary
-                    | Login
-        script(type='text/javascript', src='/assets/vendor/jquery/jquery-1.9.1.js')
-        script(type='text/javascript', src='/assets/vendor/bootstrap/js/bootstrap.js')
+extends account-layout
+
+block title
+    | sign up
+
+block main-content
+    div.container
+        form#sign-up-form.form-signin(action='/sign_up',method='POST')
+            h2.form-signin-heading
+                | Please sign up
+            div.controls
+                    div.input-prepend
+                        span.add-on
+                            i.icon-envelope
+                        input#input-email.input-block-level(type='text',placeholder='Email',name="email")
+            div.controls
+                    div.input-prepend
+                        span.add-on
+                            i.icon-edit
+                        input#input-name.input-block-level(type='text',placeholder='Name',name="name")
+            div.controls
+                    div.input-prepend
+                        span.add-on
+                            i.icon-lock
+                        input#input-password1.input-block-level(type='password',placeholder='Password',name="password1")
+            div.controls
+                    div.input-prepend
+                        span.add-on
+                            i.icon-lock
+                        input#input-password2.input-block-level(type='password',placeholder='Password Again',name="password2")
+            button#btn-sign-up.btn.btn-success(type='submit')
+                | Sign up
+            button#btn-login.btn.right-button
+                | Login
+        
+block scripts
+    script(type='text/javascript', src='/assets/js/sign-up.js')
