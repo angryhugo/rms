@@ -24,7 +24,7 @@ block main-content
                                 | Resume List
                         div.span4
                             div.span2.offset2
-                                button#btn-add-resume.btn.btn-color(data-index='#{user.id}', type='button') 添加
+                                button#btn-add-resume.btn.btn-color(data-index='#{user.id}', type='button') add
 
                 if resumeList.length > 0
                     div.span12
@@ -46,9 +46,9 @@ block main-content
                             div.span3
                                 | #{resumeList[i].address}
                             div.span2
-                                button.btn.btn-show-resume.btn-color(data-index='#{resumeList[i].id}',type='button') 查看
+                                button.btn.btn-show-resume.btn-color(data-index='#{resumeList[i].id}',type='button') view
                                 span
-                                    button.btn.btn-delete-resume.btn-color(type='button', data-index='#{resumeList[i].id}') 删除
+                                    button.btn.btn-delete-resume.btn-color(type='button', data-index='#{resumeList[i].id}') delete
 
 
 block scripts

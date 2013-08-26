@@ -13,12 +13,12 @@ block main-content
                     div.input-prepend
                         span.add-on
                             i.icon-envelope
-                        input#input-email.input-block-level(type='text',placeholder='Email',name="email")
+                        input#input-email.input-block-level(type='text',placeholder='Email',name="email",value='#{email}')
             div.controls
                     div.input-prepend
                         span.add-on
                             i.icon-lock
-                        input#input-password.input-block-level(type='password',placeholder='Password',name="password")
+                        input#input-password.input-block-level(type='password',placeholder='Password',name="password",value='#{password}')
             if (messageLogin!=='')
                 div.alert.alert-error.error-message
                     button.close(data-dismiss='alert')
@@ -26,12 +26,13 @@ block main-content
                     strong
                         | #{messageLogin}
             label.checkbox
-                input(type='checkbox',value='remember-me') 
+                input(type='checkbox',value='remember-me',name='remember_me') 
                 | Remember me
             button#btn-login.btn.btn-success(type='submit')
                 | Login
             button#btn-sign-up.btn.right-button
                 | Sign up
+
     
     //- script(type='text/javascript').
     //-     if (messageLogin!=='') {

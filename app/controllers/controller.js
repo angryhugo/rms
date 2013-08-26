@@ -5,7 +5,9 @@ module.exports = {
         var messageLogin = req.session.messageLogin || '';
         req.session.messageLogin = '';
         res.render('login', {
-            messageLogin: messageLogin
+            messageLogin: messageLogin,
+            email: req.cookies.email || '',
+            password: req.cookies.password || ''
         });
     },
 
@@ -20,6 +22,11 @@ module.exports = {
     loginHandle: function(req, res) {
         var email = req.body.email || '';
         var password = req.body.password || '';
+        if (req.body.remember_me) {
+            console.log('aaa');
+            res.cookie('email', email);
+            res.cookie('password', password);
+        }
         dbHelper.login(email, password, function(err, user) {
             if (err) {
                 console.log(err);

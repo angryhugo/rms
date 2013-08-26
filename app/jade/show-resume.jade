@@ -29,7 +29,7 @@ block main-content
                                     | Address
                                 div#address.contact-info #{allInfo.resume.address}
                             div.span1
-                                button#btn-show-edit-resume.btn.btn-color(data-toggle='modal',data-target='#edit-resume',type='button') 编辑
+                                button#btn-show-edit-resume.btn.btn-color(data-toggle='modal',data-target='#edit-resume',type='button') edit
                     div.span4
                         div.span3
                             div.name-content
@@ -50,7 +50,7 @@ block main-content
                             | Education
                     div.span4
                         div.span2.offset2
-                            button#btn-show-add-education.btn.btn-color(data-toggle='modal', data-target='#edit-education',data-index='#{allInfo.resume.id}', type='button') 添加
+                            button#btn-show-add-education.btn.btn-color(data-toggle='modal', data-target='#edit-education',data-index='#{allInfo.resume.id}', type='button') add
 
             if allInfo.educations.length > 0
                 div.span12
@@ -72,9 +72,9 @@ block main-content
                         div.span3(id='university-major#{allInfo.educations[i].id}')
                             | #{allInfo.educations[i].major}
                         div.span2
-                            button.btn.btn-show-edit-education.btn-color(data-toggle='modal', data-target='#edit-education', data-index='#{allInfo.educations[i].id}',type='button') 编辑
+                            button.btn.btn-show-edit-education.btn-color(data-toggle='modal', data-target='#edit-education', data-index='#{allInfo.educations[i].id}',type='button') edit
                             span
-                                button.btn.btn-delete-education.btn-color(type='button', data-index='#{allInfo.educations[i].id}') 删除
+                                button.btn.btn-delete-education.btn-color(type='button', data-index='#{allInfo.educations[i].id}') delete
                                                                   
         section.row.row-style.row-padding-bottom
            div.span12.block-left
@@ -84,7 +84,7 @@ block main-content
                             | Projects
                     div.span4
                         div.span2.offset2
-                            button#btn-show-add-project.btn.btn-color(data-toggle='modal', data-target='#edit-project',data-index='#{allInfo.resume.id}', type='button') 添加
+                            button#btn-show-add-project.btn.btn-color(data-toggle='modal', data-target='#edit-project',data-index='#{allInfo.resume.id}', type='button') add
             div.span12
                 div.tabbable
                     ul.nav.nav-tabs
@@ -103,9 +103,9 @@ block main-content
                                         div.span3.project-range(id="company-period#{allInfo.projects[i].id}")
                                             | #{allInfo.projects[i].range}
                                         div.span2.offset3
-                                            button.btn.btn-show-edit-project.btn-color(data-toggle='modal', data-target='#edit-project', data-index='#{allInfo.projects[i].id}',type='button') 编辑
+                                            button.btn.btn-show-edit-project.btn-color(data-toggle='modal', data-target='#edit-project', data-index='#{allInfo.projects[i].id}',type='button') edit
                                             span
-                                                button.btn.btn-delete-project.btn-color(type='button', data-index='#{allInfo.projects[i].id}') 删除
+                                                button.btn.btn-delete-project.btn-color(type='button', data-index='#{allInfo.projects[i].id}') delete
                                     p.first-upper.paragraph-indent(id="company-description#{allInfo.projects[i].id}")
                                             | #{allInfo.projects[i].description}
 
