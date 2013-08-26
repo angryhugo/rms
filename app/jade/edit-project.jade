@@ -4,7 +4,7 @@ div#edit-project.modal.hide.fade
             h3
                 | edit project
         div.modal-body
-            form#edit-project-form(action='/resumes/#{resume.id}/projects/', method='POST')
+            form#edit-project-form(action='/resumes/#{allInfo.resume.id}/projects/', method='POST')
                 input#project-list-index(type='hidden', name='edit_index', value='')
                 div.span5
                     div.row

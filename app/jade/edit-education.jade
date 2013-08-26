@@ -4,7 +4,7 @@ div#edit-education.modal.hide.fade
             h3
                 | edit education
         div.modal-body
-            form#edit-education-form(action='/resumes/#{resume.id}/education/', method='POST')
+            form#edit-education-form(action='/resumes/#{allInfo.resume.id}/education/', method='POST')
                 input#education-list-index(type='hidden', name='edit_index', value='')
                 div.span5
                     div.row

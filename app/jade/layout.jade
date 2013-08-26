@@ -78,20 +78,20 @@ html
                     div#navigation.nav-collapse.collapse
                         ul.nav
                             li#menu-item-index
-                                a(href='/resumes')
-                                    i.icon-list Resume List
+                                a(title='resume list',href='/resumes')
+                                    i.icon-list
                             li#menu-item-show-resume
                                 a(title='click "view" from resume-list page',style="cursor:default")
-                                    i.icon-file Show Resume
+                                    i.icon-file
                             li#menu-item-new-resume
-                                a(href='/resumes/new') 
-                                    i.icon-edit New Resume
-                            li#menu-item-logout
-                                a#logout(style="cursor:pointer") 
-                                    i.icon-signout Logout
+                                a(title='new resume',href='/resumes/new') 
+                                    i.icon-edit
                             li#menu-item-change-password
-                                a(href='/account/password')
-                                    i.icon-lock Password
+                                a(title='change password',href='/account/password')
+                                    i.icon-lock
+                            li#menu-item-logout
+                                a#logout(title='logout',style="cursor:pointer") 
+                                    i.icon-signout
 
         block main-content
 

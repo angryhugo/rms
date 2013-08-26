@@ -169,11 +169,7 @@ module.exports = {
                 } else {
                     if (existFlag) {
                         res.render('show-resume', {
-                            title: allInfo.title,
-                            user: allInfo.user,
-                            resume: allInfo.resume,
-                            projectList: allInfo.projects,
-                            educationList: allInfo.educations
+                            allInfo: allInfo
                         });
                     } else {
                         res.redirect('/resumes');
@@ -199,13 +195,7 @@ module.exports = {
 
     editResumeBasic: function(req, res) {
         var resumeId = req.params.id || "";
-        var newResume = {
-            name: req.body.resume_name || "",
-            age: req.body.age || "",
-            email: req.body.email || "",
-            gender: req.body.genderRadios || "",
-            address: req.body.address || ""
-        };
+        var newResume = getNewResumeBasic(req, res);
         dbHelper.editResumeBasic(resumeId, newResume, function(err) {
             if (err) {
                 console.log(err);
@@ -324,20 +314,19 @@ function getNewProject(req, res) {
     return newProject;
 };
 
-function getNewResume(req, res) {
-    var resume_name = req.body.resume_name || "";
-    var email = req.body.email || "";
-    var age = req.body.age || "";
-    var gender = req.body.genderRadios || "";
-    var address = req.body.address || "";
-
-    var newResumeBasic = {
-        name: resume_name,
-        email: email,
-        age: age,
-        gender: gender,
-        address: address
+function getNewResumeBasic(req, res) {
+    var newResume = {
+        name: req.body.resume_name || "",
+        age: req.body.age || "",
+        email: req.body.email || "",
+        gender: req.body.genderRadios || "",
+        address: req.body.address || ""
     };
+    return newResume;
+};
+
+function getNewResume(req, res) {
+    var newResumeBasic = getNewResumeBasic(req, res);
 
     var company = req.body.company || "";
     var companyPeriodFrom = req.body.company_period_from || "";

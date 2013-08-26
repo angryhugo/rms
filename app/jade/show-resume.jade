@@ -1,7 +1,7 @@
 extends layout
 
 block title
-    | #{title}
+    | #{allInfo.title}
 append head
     link(rel='stylesheet', href='/static/css/show-resume.css')
     link(rel='stylesheet', href='/assets/vendor/bootstrap/css/datetimepicker.css')
@@ -11,23 +11,23 @@ block main-content
             div.span12.padding-nav-top
                 div.row
                     div.span8
-                        div#resume-name.span8.name-content #{resume.name}
-                        div#resume-id.span8(style='display:none') #{resume.id}
+                        div#resume-name.span8.name-content #{allInfo.resume.name}
+                        div#resume-id.span8(style='display:none') #{allInfo.resume.id}
                         div.row
                             div.span3
                                 h3
                                     | Email
-                                div#email.contact-info #{resume.email}
+                                div#email.contact-info #{allInfo.resume.email}
                                 h3
                                     | Age
-                                div#age.contact-info #{resume.age}
+                                div#age.contact-info #{allInfo.resume.age}
                             div.span3.offset1
                                 h3
                                     |Gender
-                                div#gender.contact-info #{resume.gender}
+                                div#gender.contact-info #{allInfo.resume.gender}
                                 h3
                                     | Address
-                                div#address.contact-info #{resume.address}
+                                div#address.contact-info #{allInfo.resume.address}
                             div.span1
                                 button#btn-show-edit-resume.btn.btn-color(data-toggle='modal',data-target='#edit-resume',type='button') 编辑
                     div.span4
@@ -37,11 +37,11 @@ block main-content
                         div.span1
                             h3
                                 | Name
-                        div.span2.contact-info.user-name-top #{user.name}
+                        div.span2.contact-info.user-name-top #{allInfo.user.name}
                         div.span3
                             h3
                                 | Email
-                            div.contact-info #{user.email}
+                            div.contact-info #{allInfo.user.email}
         section.row.row-style.row-padding-bottom
             div.span12.block-left
                 div.row
@@ -50,9 +50,9 @@ block main-content
                             | Education
                     div.span4
                         div.span2.offset2
-                            button#btn-show-add-education.btn.btn-color(data-toggle='modal', data-target='#edit-education',data-index='#{resume.id}', type='button') 添加
+                            button#btn-show-add-education.btn.btn-color(data-toggle='modal', data-target='#edit-education',data-index='#{allInfo.resume.id}', type='button') 添加
 
-            if educationList.length > 0
+            if allInfo.educations.length > 0
                 div.span12
                     div.span3
                         h3
@@ -63,18 +63,18 @@ block main-content
                     div.span3
                         h3
                             | Major
-                - for (var i=0;i<educationList.length;i++)
-                    div.span12(id='education-list#{educationList[i].id}')
-                        div.span3(id='university#{educationList[i].id}')
-                            | #{educationList[i].school}
-                        div.span3(id='university-period#{educationList[i].id}')
-                            | #{educationList[i].range}
-                        div.span3(id='university-major#{educationList[i].id}')
-                            | #{educationList[i].major}
+                - for (var i=0;i<allInfo.educations.length;i++)
+                    div.span12(id='education-list#{allInfo.educations[i].id}')
+                        div.span3(id='university#{allInfo.educations[i].id}')
+                            | #{allInfo.educations[i].school}
+                        div.span3(id='university-period#{allInfo.educations[i].id}')
+                            | #{allInfo.educations[i].range}
+                        div.span3(id='university-major#{allInfo.educations[i].id}')
+                            | #{allInfo.educations[i].major}
                         div.span2
-                            button.btn.btn-show-edit-education.btn-color(data-toggle='modal', data-target='#edit-education', data-index='#{educationList[i].id}',type='button') 编辑
+                            button.btn.btn-show-edit-education.btn-color(data-toggle='modal', data-target='#edit-education', data-index='#{allInfo.educations[i].id}',type='button') 编辑
                             span
-                                button.btn.btn-delete-education.btn-color(type='button', data-index='#{educationList[i].id}') 删除
+                                button.btn.btn-delete-education.btn-color(type='button', data-index='#{allInfo.educations[i].id}') 删除
                                                                   
         section.row.row-style.row-padding-bottom
            div.span12.block-left
@@ -84,30 +84,30 @@ block main-content
                             | Projects
                     div.span4
                         div.span2.offset2
-                            button#btn-show-add-project.btn.btn-color(data-toggle='modal', data-target='#edit-project',data-index='#{resume.id}', type='button') 添加
+                            button#btn-show-add-project.btn.btn-color(data-toggle='modal', data-target='#edit-project',data-index='#{allInfo.resume.id}', type='button') 添加
             div.span12
                 div.tabbable
                     ul.nav.nav-tabs
-                        if projectList.length > 0
-                            - for (var i=0;i<projectList.length;i++)
-                                li(id='project-list#{projectList[i].id}')
-                                    a(href="#tab#{projectList[i].id}",data-toggle="tab") pro#{i+1}
+                        if allInfo.projects.length > 0
+                            - for (var i=0;i<allInfo.projects.length;i++)
+                                li(id='project-list#{allInfo.projects[i].id}')
+                                    a(href="#tab#{allInfo.projects[i].id}",data-toggle="tab") pro#{i+1}
 
                     div.tab-content
-                        if projectList.length > 0
-                            - for (var i=0;i<projectList.length;i++)
-                                div.span11.tab-pane(id="tab#{projectList[i].id}")
+                        if allInfo.projects.length > 0
+                            - for (var i=0;i<allInfo.projects.length;i++)
+                                div.span11.tab-pane(id="tab#{allInfo.projects[i].id}")
                                     div.row
-                                        div.span3.project-range(id="company#{projectList[i].id}")
-                                            | #{projectList[i].company}
-                                        div.span3.project-range(id="company-period#{projectList[i].id}")
-                                            | #{projectList[i].range}
+                                        div.span3.project-range(id="company#{allInfo.projects[i].id}")
+                                            | #{allInfo.projects[i].company}
+                                        div.span3.project-range(id="company-period#{allInfo.projects[i].id}")
+                                            | #{allInfo.projects[i].range}
                                         div.span2.offset3
-                                            button.btn.btn-show-edit-project.btn-color(data-toggle='modal', data-target='#edit-project', data-index='#{projectList[i].id}',type='button') 编辑
+                                            button.btn.btn-show-edit-project.btn-color(data-toggle='modal', data-target='#edit-project', data-index='#{allInfo.projects[i].id}',type='button') 编辑
                                             span
-                                                button.btn.btn-delete-project.btn-color(type='button', data-index='#{projectList[i].id}') 删除
-                                    p.first-upper.paragraph-indent(id="company-description#{projectList[i].id}")
-                                            | #{projectList[i].description}
+                                                button.btn.btn-delete-project.btn-color(type='button', data-index='#{allInfo.projects[i].id}') 删除
+                                    p.first-upper.paragraph-indent(id="company-description#{allInfo.projects[i].id}")
+                                            | #{allInfo.projects[i].description}
 
 
     include edit-resume
