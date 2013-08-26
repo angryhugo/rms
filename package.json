@@ -2,7 +2,7 @@
     "name": "rms",
     "version": "0.0.1-0001",
     "description": "manage resumes by user",
-    "repository": "git@git.leediancn.com:jisong.zhu/rms.git",
+    "repository": "git@github.com:rookiehugo/rms.git",
     "dependencies": {
         "express": "*",
         "less-middleware": "*",

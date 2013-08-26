@@ -2,20 +2,20 @@ var dbHelper = require('../models/dbHelper');
 
 module.exports = {
     login: function(req, res) {
-        var messageLogin = req.session.messageLogin || '';
-        req.session.messageLogin = '';
+        var errMessage = req.session.errMessage || '';
+        req.session.errMessage = '';
         res.render('login', {
-            messageLogin: messageLogin,
+            errMessage: errMessage,
             email: req.cookies.email || '',
             password: req.cookies.password || ''
         });
     },
 
     signUp: function(req, res) {
-        var messageSignUp = req.session.messageSignUp || '';
-        req.session.messageSignUp = '';
+        var errMessage = req.session.errMessage || '';
+        req.session.errMessage = '';
         res.render('sign-up', {
-            messageSignUp: messageSignUp
+            errMessage: errMessage
         });
     },
 
@@ -37,7 +37,7 @@ module.exports = {
                     req.session.userEmail = user.email;
                     res.redirect('/resumes');
                 } else {
-                    req.session.messageLogin = '帐号密码错误！';
+                    req.session.errMessage = '帐号密码错误！';
                     res.redirect('/account/login');
                 }
             }
@@ -52,7 +52,7 @@ module.exports = {
             if (err) {
                 console.log(err);
                 //email唯一，导致错误
-                req.session.messageSignUp = 'email已存在！';
+                req.session.errMessage = 'email已存在！';
                 res.redirect('/account/sign_up');
             } else {
                 if (userId) {
@@ -95,11 +95,11 @@ module.exports = {
 
     changePassword: function(req, res) {
         if (req.session.userId) {
-            var messagePassword = req.session.messagePassword || '';
-            req.session.messagePassword = '';
+            var errMessage = req.session.errMessage || '';
+            req.session.errMessage = '';
             res.render('password', {
                 email: req.session.userEmail,
-                messagePassword: messagePassword
+                errMessage: errMessage
             });
         } else {
             res.redirect('/account/login');
@@ -117,7 +117,7 @@ module.exports = {
                 if (oldPasswordRight) {
                     res.redirect('/resumes');
                 } else {
-                    req.session.messagePassword = "旧密码错误！";
+                    req.session.errMessage = "旧密码错误！";
                     res.redirect('/account/password');
                 }
             }

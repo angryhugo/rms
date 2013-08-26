@@ -4,7 +4,6 @@ block title
     | login
 
 block main-content
-
     div.container
         form#login-form.form-signin(action='/account/login',method='POST')
             h1
@@ -19,18 +18,18 @@ block main-content
                         span.add-on
                             i.icon-lock
                         input#input-password.input-block-level(type='password',placeholder='Password',name="password",value='#{password}')
-            if (messageLogin!=='')
+            if (errMessage!=='')
                 div.alert.alert-error.error-message
                     button.close(data-dismiss='alert')
                         &times;
                     strong
-                        | #{messageLogin}
+                        | #{errMessage}
             label.checkbox
                 input(type='checkbox',value='remember-me',name='remember_me') 
                 | Remember me
             button#btn-login.btn.btn-success(type='submit')
                 | Login
-            button#btn-sign-up.btn.right-button
+            a#btn-sign-up.btn.right-button
                 | Sign up
 
     
