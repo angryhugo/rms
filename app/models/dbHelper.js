@@ -81,7 +81,7 @@ exports.showResumeInfo = function(userId, resumeId, callback) {
 				callback(null, allInfo, false);
 			} else {
 				Education.findAll({
-					where: ["resume_id = ?", resume.id]
+					where: ['resume_id = ?', resume.id]
 				}).success(function(educations) {
 					Project.findAll({
 						where: {

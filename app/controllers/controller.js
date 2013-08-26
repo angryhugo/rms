@@ -1,5 +1,3 @@
-var fs = require('fs');
-var path = require('path');
 var dbHelper = require('../models/dbHelper');
 
 module.exports = {
@@ -20,8 +18,8 @@ module.exports = {
     },
 
     loginHandle: function(req, res) {
-        var email = req.body.email || "";
-        var password = req.body.password || "";
+        var email = req.body.email || '';
+        var password = req.body.password || '';
         dbHelper.login(email, password, function(err, user) {
             if (err) {
                 console.log(err);
@@ -40,9 +38,9 @@ module.exports = {
     },
 
     signUpHandle: function(req, res) {
-        var email = req.body.email || "";
-        var password = req.body.password1 || "";
-        var name = req.body.name || "";
+        var email = req.body.email || '';
+        var password = req.body.password1 || '';
+        var name = req.body.name || '';
         dbHelper.signUp(email, password, name, function(err, userId) {
             if (err) {
                 console.log(err);
@@ -83,7 +81,7 @@ module.exports = {
 
     logout: function(req, res) {
         req.session.userId = 0;
-        req.session.userEmail = "";
+        req.session.userEmail = '';
         res.send('logout successfully!');
         //res.redirect('/login');//使用ajax后这条语句不会执行
     },
@@ -102,8 +100,8 @@ module.exports = {
     },
 
     changePasswordHandle: function(req, res) {
-        var oldPassword = req.body.old_password || "";
-        var newPassword = req.body.password1 || "";
+        var oldPassword = req.body.old_password || '';
+        var newPassword = req.body.password1 || '';
         dbHelper.changePassword(req.session.userId, oldPassword, newPassword, function(err, oldPasswordRight) {
             if (err) {
                 console.log(err);
@@ -161,7 +159,7 @@ module.exports = {
     viewResume: function(req, res) {
         if (req.session.userId) {
             var userId = req.session.userId;
-            var resumeId = req.params.id || "";
+            var resumeId = req.params.id || '';
             dbHelper.showResumeInfo(userId, resumeId, function(err, allInfo, existFlag) {
                 if (err) {
                     console.log(err);
@@ -182,7 +180,7 @@ module.exports = {
     },
 
     deleteResume: function(req, res) {
-        var resumeId = req.params.id || "";
+        var resumeId = req.params.id || '';
         dbHelper.deleteResume(resumeId, function(err) {
             if (err) {
                 console.log(err);
@@ -194,7 +192,7 @@ module.exports = {
     },
 
     editResumeBasic: function(req, res) {
-        var resumeId = req.params.id || "";
+        var resumeId = req.params.id || '';
         var newResume = getNewResumeBasic(req, res);
         dbHelper.editResumeBasic(resumeId, newResume, function(err) {
             if (err) {
@@ -208,8 +206,8 @@ module.exports = {
 
     editEducation: function(req, res) {
         var newEducation = getNewEducation(req, res);
-        var resumeId = req.params.resume_id || "";
-        var educationId = req.params.id || "";
+        var resumeId = req.params.resume_id || '';
+        var educationId = req.params.id || '';
         dbHelper.editEducation(educationId, newEducation, function(err) {
             if (err) {
                 console.log(err);
@@ -222,7 +220,7 @@ module.exports = {
 
     addEducation: function(req, res) {
         var newEducation = getNewEducation(req, res);
-        var resumeId = req.params.resume_id || "";
+        var resumeId = req.params.resume_id || '';
         dbHelper.addEducation(resumeId, newEducation, function(err) {
             if (err) {
                 console.log(err);
@@ -235,7 +233,7 @@ module.exports = {
 
     deleteEducation: function(req, res) {
         var id = req.params.id || '';
-        var resumeId = req.params.resume_id || "";
+        var resumeId = req.params.resume_id || '';
         dbHelper.deleteEducation(id, function(err) {
             if (err) {
                 console.log(err);
@@ -249,8 +247,8 @@ module.exports = {
 
     editProject: function(req, res) {
         var newProject = getNewProject(req, res);
-        var resumeId = req.params.resume_id || "";
-        var projectId = req.params.id || "";
+        var resumeId = req.params.resume_id || '';
+        var projectId = req.params.id || '';
         dbHelper.editProject(projectId, newProject, function(err) {
             if (err) {
                 console.log(err);
@@ -263,7 +261,7 @@ module.exports = {
 
     addProject: function(req, res) {
         var newProject = getNewProject(req, res);
-        var resumeId = req.params.resume_id || "";
+        var resumeId = req.params.resume_id || '';
         dbHelper.addProject(resumeId, newProject, function(err) {
             if (err) {
                 console.log(err);
@@ -276,7 +274,7 @@ module.exports = {
 
     deleteProject: function(req, res) {
         var id = req.params.id || '';
-        var resumeId = req.params.resume_id || "";
+        var resumeId = req.params.resume_id || '';
         dbHelper.deleteProject(id, function(err) {
             if (err) {
                 console.log(err);
@@ -289,26 +287,26 @@ module.exports = {
 };
 
 function getNewEducation(req, res) {
-    var university = req.body.edit_university || "";
-    var periodFrom = req.body.edit_university_period_from || "";
-    var periodTo = req.body.edit_university_period_to || "";
-    var major = req.body.edit_university_major || "";
+    var university = req.body.edit_university || '';
+    var periodFrom = req.body.edit_university_period_from || '';
+    var periodTo = req.body.edit_university_period_to || '';
+    var major = req.body.edit_university_major || '';
     var newEducation = {
         school: university,
-        range: periodFrom + "-" + periodTo,
+        range: periodFrom + '-' + periodTo,
         major: major,
     };
     return newEducation;
 };
 
 function getNewProject(req, res) {
-    var company = req.body.edit_company || "";
-    var periodFrom = req.body.edit_company_period_from || "";
-    var periodTo = req.body.edit_company_period_to || "";
-    var description = req.body.edit_company_description || "";
+    var company = req.body.edit_company || '';
+    var periodFrom = req.body.edit_company_period_from || '';
+    var periodTo = req.body.edit_company_period_to || '';
+    var description = req.body.edit_company_description || '';
     var newProject = {
         company: company,
-        range: periodFrom + "-" + periodTo,
+        range: periodFrom + '-' + periodTo,
         description: description,
     };
     return newProject;
@@ -316,11 +314,11 @@ function getNewProject(req, res) {
 
 function getNewResumeBasic(req, res) {
     var newResume = {
-        name: req.body.resume_name || "",
-        age: req.body.age || "",
-        email: req.body.email || "",
-        gender: req.body.genderRadios || "",
-        address: req.body.address || ""
+        name: req.body.resume_name || '',
+        age: req.body.age || '',
+        email: req.body.email || '',
+        gender: req.body.genderRadios || '',
+        address: req.body.address || ''
     };
     return newResume;
 };
@@ -328,23 +326,23 @@ function getNewResumeBasic(req, res) {
 function getNewResume(req, res) {
     var newResumeBasic = getNewResumeBasic(req, res);
 
-    var company = req.body.company || "";
-    var companyPeriodFrom = req.body.company_period_from || "";
-    var companyPeriodTo = req.body.company_period_to || "";
-    var description = req.body.company_description || "";
+    var company = req.body.company || '';
+    var companyPeriodFrom = req.body.company_period_from || '';
+    var companyPeriodTo = req.body.company_period_to || '';
+    var description = req.body.company_description || '';
     var newProject = {
         company: company,
-        range: companyPeriodFrom + "-" + companyPeriodTo,
+        range: companyPeriodFrom + '-' + companyPeriodTo,
         description: description,
     };
 
-    var university = req.body.university || "";
-    var universityPeriodFrom = req.body.university_period_from || "";
-    var universityPeriodTo = req.body.university_period_to || "";
-    var major = req.body.university_major || "";
+    var university = req.body.university || '';
+    var universityPeriodFrom = req.body.university_period_from || '';
+    var universityPeriodTo = req.body.university_period_to || '';
+    var major = req.body.university_major || '';
     var newEducation = {
         school: university,
-        range: universityPeriodFrom + "-" + universityPeriodTo,
+        range: universityPeriodFrom + '-' + universityPeriodTo,
         major: major,
     };
 

@@ -7,10 +7,10 @@ var app = express();
 app.locals.version = 'v' + version;
 
 process.on('uncaughtException', function(err) {
-    console.log("server encounter uncaughtException: ");
+    console.log('server encounter uncaughtException: ');
     console.error(err);
     console.error(err.stack);
-    console.log("Node NOT Exiting...");
+    console.log('Node NOT Exiting...');
 });
 
 require('./environment')(app, express);

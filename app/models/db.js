@@ -13,20 +13,20 @@
  * ========================================================== */
 User.create({
     id: 1,
-    name: 'hugo',
+    name: 'hugo yin',
     email: 'hanchun.yin@leediancn.com',
-    password: 'hugoyhc'
+    password: '123456'
 }).success(function(user) {
     Resume.create({
         id: 1,
-        name: 'engineer resume',
+        name: 'hanchun yin',
         email: 'hanchun.yin@leediancn.com',
         age: 21,
         gender: '男',
         address: '宜山路900号A#306',
         user_id: user.id
     }).success(function(resume) {
-        console.log("resume1 created successfully!");
+        console.log('resume1 created successfully!');
         Education.bulkCreate([{
             id: 1,
             resume_id: resume.id,
@@ -40,7 +40,7 @@ User.create({
             range: 'April 2005-September 2007',
             major: 'BACHELOR OF ARTS'
     }]).success(function(education) {
-            console.log("education created successfully!");
+            console.log('education created successfully!');
         }).error(function(err) {
             console.log(err);
         });
@@ -58,7 +58,7 @@ User.create({
                 range: 'July 2012-JUNE 2013',
                 description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec lobortis varius turpis sit amet commodo. Aenean a diam id nisl dodales ultrices. Proin id leo ut turpis placerat pharetra. Nunc et lacus sed arcu lobortis pharetra. Mauris sagittis consectetur sapien pretium aliquet.'
     }]).success(function(project) {
-            console.log("project created successfully!")
+            console.log('project created successfully!')
         }).error(function(err) {
             console.log(err);
         });

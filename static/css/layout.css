@@ -25,10 +25,6 @@
     /*即定义了 font-size=20px, line-height=1.8, font-family='Optima','Songti SC','Verdana','Microsoft Yahei',simsun,serif*/
     background-color: #e3e1ec;
     text-shadow: 1px 1px 5px rgb(99, 96, 94);/*text-shadow:[x轴(X Offset) y轴(Y Offset)  模糊半径(Blur)  颜色(Color)]*/
-    /*color: #555555;
-    cursor: default;
-    border: 1px solid #ddd;
-    border-bottom-color: transparent;*/
 }
 
 .nav-tabs > li > a {
@@ -40,7 +36,7 @@
     background-color: #DEDCEB;
 }
 
-.navbar-inverse .nav > li > a:hover { /*到上方后有个左移的效果怎么去掉 离开时怎么慢慢下来*/
+.navbar-inverse .nav > li > a:hover {
 /*    -webkit-text-fill-color: transparent;   设置颜色*/
     -webkit-transform: translateY(-5px);
     -webkit-transition: .5s;
