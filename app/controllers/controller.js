@@ -94,8 +94,7 @@ module.exports = {
     logout: function(req, res) {
         req.session.userId = 0;
         req.session.userEmail = '';
-        res.send('logout successfully!');
-        //res.redirect('/login');//使用ajax后这条语句不会执行
+        res.redirect('/login');
     },
 
     changePassword: function(req, res) {
