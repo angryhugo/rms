@@ -5,7 +5,7 @@ module.exports = function(app, express) {
     app.set('views', path.join(__dirname, 'jade'));
     app.set('view engine', 'jade');
     app.locals.nodeEnv = process.env.NODE_ENV || 'development';
-    app.use(express.favicon());
+    app.use(express.favicon(path.join(__dirname, '..', 'static', 'images', 'resume.ico')));
     app.use(express.compress());
     app.use(express.bodyParser());
     app.use(express.methodOverride());
