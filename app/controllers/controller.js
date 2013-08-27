@@ -11,21 +11,18 @@ module.exports = {
         });
     },
 
-    signUp: function(req, res) {
-        var errMessage = req.session.errMessage || '';
-        req.session.errMessage = '';
-        res.render('sign-up', {
-            errMessage: errMessage
-        });
-    },
-
     loginHandle: function(req, res) {
         var email = req.body.email || '';
         var password = req.body.password || '';
         if (req.body.remember_me) {
-            console.log('aaa');
-            res.cookie('email', email);
-            res.cookie('password', password);
+            res.cookie('email', email, {
+                maxAge: 24 * 60 * 60 * 1000,
+                httpOnly: true
+            });
+            res.cookie('password', password, {
+                maxAge: 24 * 60 * 60 * 1000,
+                httpOnly: true
+            });
         }
         dbHelper.login(email, password, function(err, user) {
             if (err) {
@@ -37,29 +34,37 @@ module.exports = {
                     req.session.userEmail = user.email;
                     res.redirect('/resumes');
                 } else {
-                    req.session.errMessage = '帐号密码错误！';
-                    res.redirect('/account/login');
+                    req.session.errMessage = 'The username or password you entered is incorrect.';
+                    res.redirect('/login');
                 }
             }
         });
     },
 
+    signUp: function(req, res) {
+        var errMessage = req.session.errMessage || '';
+        req.session.errMessage = '';
+        res.render('sign-up', {
+            errMessage: errMessage
+        });
+    },
+
     signUpHandle: function(req, res) {
         var email = req.body.email || '';
-        var password = req.body.password1 || '';
+        var password = req.body.password || '';
         var name = req.body.name || '';
         dbHelper.signUp(email, password, name, function(err, userId) {
             if (err) {
                 console.log(err);
                 //email唯一，导致错误
-                req.session.errMessage = 'email已存在！';
-                res.redirect('/account/sign_up');
+                req.session.errMessage = 'email existed！';
+                res.redirect('/sign_up');
             } else {
                 if (userId) {
                     req.session.userId = userId;
                     res.redirect('/resumes');
                 } else {
-                    res.redirect('/account/sign_up');
+                    res.redirect('/sign_up');
                 }
             }
         });
@@ -94,21 +99,17 @@ module.exports = {
     },
 
     changePassword: function(req, res) {
-        if (req.session.userId) {
-            var errMessage = req.session.errMessage || '';
-            req.session.errMessage = '';
-            res.render('password', {
-                email: req.session.userEmail,
-                errMessage: errMessage
-            });
-        } else {
-            res.redirect('/account/login');
-        }
+        var errMessage = req.session.errMessage || '';
+        req.session.errMessage = '';
+        res.render('password', {
+            email: req.session.userEmail,
+            errMessage: errMessage
+        });
     },
 
     changePasswordHandle: function(req, res) {
         var oldPassword = req.body.old_password || '';
-        var newPassword = req.body.password1 || '';
+        var newPassword = req.body.new_password || '';
         dbHelper.changePassword(req.session.userId, oldPassword, newPassword, function(err, oldPasswordRight) {
             if (err) {
                 console.log(err);
@@ -117,25 +118,21 @@ module.exports = {
                 if (oldPasswordRight) {
                     res.redirect('/resumes');
                 } else {
-                    req.session.errMessage = "旧密码错误！";
-                    res.redirect('/account/password');
+                    req.session.errMessage = "old password is incorrect！";
+                    res.redirect('/password');
                 }
             }
         });
     },
 
     showNewResumePage: function(req, res) {
-        if (req.session.userId) {
-            res.render('new-resume', {
-                userId: req.session.userId
-            });
-        } else {
-            res.redirect('/account/login');
-        }
+        res.render('new-resume', {
+            userId: req.session.userId
+        });
     },
 
     addNewResume: function(req, res) {
-        var userId = req.session.userId; //获取登录后的userId
+        var userId = req.session.userId;
         var newResume = getNewResume(req, res);
         dbHelper.addNewResume(userId, newResume, function(err) {
             if (err) {
@@ -147,43 +144,35 @@ module.exports = {
     },
 
     showResumeList: function(req, res) {
-        if (req.session.userId) {
-            dbHelper.showResumeList(req.session.userId, function(err, user, resumeList, existFlag) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    res.render('resume-list', {
-                        resumeList: resumeList,
-                        user: user
-                    });
-                }
-            });
-        } else {
-            res.redirect('/account/login');
-        }
+        dbHelper.showResumeList(req.session.userId, function(err, user, resumeList, existFlag) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.render('resume-list', {
+                    resumeList: resumeList,
+                    user: user
+                });
+            }
+        });
     },
 
     viewResume: function(req, res) {
-        if (req.session.userId) {
-            var userId = req.session.userId;
-            var resumeId = req.params.id || '';
-            dbHelper.showResumeInfo(userId, resumeId, function(err, allInfo, existFlag) {
-                if (err) {
-                    console.log(err);
-                    res.send('Server error!');
+        var userId = req.session.userId;
+        var resumeId = req.params.id || '';
+        dbHelper.showResumeInfo(userId, resumeId, function(err, allInfo, existFlag) {
+            if (err) {
+                console.log(err);
+                res.send('Server error!');
+            } else {
+                if (existFlag) {
+                    res.render('show-resume', {
+                        allInfo: allInfo
+                    });
                 } else {
-                    if (existFlag) {
-                        res.render('show-resume', {
-                            allInfo: allInfo
-                        });
-                    } else {
-                        res.redirect('/resumes');
-                    }
+                    res.redirect('/resumes');
                 }
-            });
-        } else {
-            res.redirect('/account/login');
-        }
+            }
+        });
     },
 
     deleteResume: function(req, res) {
@@ -222,7 +211,7 @@ module.exports = {
             } else {
                 res.redirect('/resumes/' + resumeId);
             }
-        })
+        });
     },
 
     addEducation: function(req, res) {
@@ -263,7 +252,7 @@ module.exports = {
             } else {
                 res.redirect('/resumes/' + resumeId);
             }
-        })
+        });
     },
 
     addProject: function(req, res) {
@@ -276,7 +265,7 @@ module.exports = {
             } else {
                 res.redirect('/resumes/' + resumeId);
             }
-        })
+        });
     },
 
     deleteProject: function(req, res) {

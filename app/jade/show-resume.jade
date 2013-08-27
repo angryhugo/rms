@@ -1,7 +1,7 @@
 extends layout
 
 block title
-    | #{allInfo.title}
+    | show resume info
 append head
     link(rel='stylesheet', href='/static/css/show-resume.css')
     link(rel='stylesheet', href='/assets/vendor/bootstrap/css/datetimepicker.css')
@@ -63,18 +63,18 @@ block main-content
                     div.span3
                         h3
                             | Major
-                - for (var i=0;i<allInfo.educations.length;i++)
-                    div.span12(id='education-list#{allInfo.educations[i].id}')
-                        div.span3(id='university#{allInfo.educations[i].id}')
-                            | #{allInfo.educations[i].school}
-                        div.span3(id='university-period#{allInfo.educations[i].id}')
-                            | #{allInfo.educations[i].range}
-                        div.span3(id='university-major#{allInfo.educations[i].id}')
-                            | #{allInfo.educations[i].major}
+                each education in allInfo.educations
+                    div.span12(id='education-list#{education.id}')
+                        div.span3(id='university#{education.id}')
+                            | #{education.school}
+                        div.span3(id='university-period#{education.id}')
+                            | #{education.range}
+                        div.span3(id='university-major#{education.id}')
+                            | #{education.major}
                         div.span2
-                            button.btn.btn-show-edit-education.btn-color(data-toggle='modal', data-target='#edit-education', data-index='#{allInfo.educations[i].id}',type='button') edit
+                            button.btn.btn-show-edit-education.btn-color(data-toggle='modal', data-target='#edit-education', data-index='#{education.id}',type='button') edit
                             span
-                                button.btn.btn-delete-education.btn-color(type='button', data-index='#{allInfo.educations[i].id}') delete
+                                button.btn.btn-delete-education.btn-color(type='button', data-index='#{education.id}') delete
                                                                   
         section.row.row-style.row-padding-bottom
            div.span12.block-left

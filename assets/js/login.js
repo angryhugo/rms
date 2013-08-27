@@ -1,7 +1,6 @@
 $(function() {
 	var _loginForm = $('#login-form');
-	var _loginBtn = $('#btn-login');
-	var _signUpBtn = $('#btn-sign-up');
+	// var _loginBtn = $('#btn-login');
 
 	// _loginBtn.on('click', function() {
 	// 	$.ajax({
@@ -37,9 +36,5 @@ $(function() {
 				maxlength: 16
 			}
 		}
-	});
-
-	_signUpBtn.on('click', function() {
-		window.location.href = '/account/sign_up';
 	});
 });

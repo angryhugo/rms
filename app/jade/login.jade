@@ -5,7 +5,7 @@ block title
 
 block main-content
     div.container
-        form#login-form.form-signin(action='/account/login',method='POST')
+        form#login-form.form-signin(action='/login',method='POST')
             h1
                 | Sign in
             div.controls
@@ -29,7 +29,7 @@ block main-content
                 | Remember me
             button#btn-login.btn.btn-success(type='submit')
                 | Login
-            a#btn-sign-up.btn.right-button
+            a.btn.right-button(href='/sign_up')
                 | Sign up
 
     

@@ -5,7 +5,7 @@ block title
 
 block main-content
     div.container
-        form#sign-up-form.form-signin(action='/account/sign_up',method='POST')
+        form#sign-up-form.form-signin(action='/sign_up',method='POST')
             h1
                 | Sign up
             div.controls
@@ -22,12 +22,12 @@ block main-content
                     div.input-prepend
                         span.add-on
                             i.icon-lock
-                        input#input-password1.input-block-level(type='password',placeholder='Password',name="password1")
+                        input#input-password.input-block-level(type='password',placeholder='Password',name="password")
             div.controls
                     div.input-prepend
                         span.add-on
                             i.icon-lock
-                        input#input-password2.input-block-level(type='password',placeholder='Password Again',name="password2")
+                        input#input-password-again.input-block-level(type='password',placeholder='Password Again',name="password_again")
             if (errMessage!=='')
                 div.alert.alert-error.error-message
                     button.close(data-dismiss='alert')
@@ -36,7 +36,7 @@ block main-content
                         | #{errMessage}
             button#btn-sign-up.btn.btn-success(type='submit')
                 | Sign up
-            a#btn-login.btn.right-button
+            a.btn.right-button(href='/login')
                 | Login
         
 block scripts

@@ -88,16 +88,15 @@ html
                                 a(title='new resume',href='/resumes/new') 
                                     i.icon-edit
                             li#menu-item-change-password
-                                a(title='change password',href='/account/password')
+                                a(title='change password',href='/password')
                                     i.icon-lock
                             li#menu-item-logout
-                                a#logout(title='logout',style="cursor:pointer") 
+                                a#logout(title='logout',href='/login') 
                                     i.icon-signout
 
         block main-content
 
         script(type='text/javascript', src='/assets/vendor/jquery/jquery-1.9.1.js')
         script(type='text/javascript', src='/assets/vendor/bootstrap/js/bootstrap.js')
-        script(type='text/javascript', src='/assets/js/layout.js')
         block scripts
         | <!--<![endif]-->

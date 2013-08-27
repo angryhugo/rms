@@ -24,7 +24,7 @@ exports.login = function(email, password, callback) {
 		}
 	}).error(function(err) {
 		callback(err);
-	})
+	});
 };
 
 exports.signUp = function(email, password, name, callback) {
@@ -54,7 +54,7 @@ exports.changePassword = function(userId, oldPassword, newPassword, callback) {
 		}
 	}).error(function(err) {
 		callback(err);
-	})
+	});
 },
 
 exports.showResumeList = function(userId, callback) {
@@ -70,7 +70,7 @@ exports.showResumeList = function(userId, callback) {
 		});
 	}).error(function(err) {
 		callback(err);
-	})
+	});
 };
 
 exports.showResumeInfo = function(userId, resumeId, callback) {
@@ -88,7 +88,6 @@ exports.showResumeInfo = function(userId, resumeId, callback) {
 							resume_id: resume.id
 						}
 					}).success(function(projects) {
-						allInfo.title = 'show resume info';
 						allInfo.user = user;
 						allInfo.resume = resume;
 						allInfo.projects = projects;
@@ -110,17 +109,30 @@ exports.showResumeInfo = function(userId, resumeId, callback) {
 };
 
 exports.editResumeBasic = function(id, newResume, callback) {
-	Resume.find(id).success(function(resume) {
-		resume.name = newResume.name;
-		resume.age = newResume.age;
-		resume.gender = newResume.gender;
-		resume.email = newResume.email;
-		resume.address = newResume.address;
-		resume.save().success(function(resume) {
-			callback(null);
-		}).error(function(err) {
-			callback(err);
-		});
+	// Resume.find(id).success(function(resume) {
+	// 	resume.name = newResume.name;
+	// 	resume.age = newResume.age;
+	// 	resume.gender = newResume.gender;
+	// 	resume.email = newResume.email;
+	// 	resume.address = newResume.address;
+	// 	resume.save().success(function(resume) {
+	// 		callback(null);
+	// 	}).error(function(err) {
+	// 		callback(err);
+	// 	});
+	// }).error(function(err) {
+	// 	callback(err);
+	// });
+	Resume.update({
+		name: newResume.name,
+		age: newResume.age,
+		gender: newResume.gender,
+		email: newResume.email,
+		address: newResume.address
+	}, {
+		id: id
+	}).success(function(resume) {
+		callback(null);
 	}).error(function(err) {
 		callback(err);
 	});
@@ -149,15 +161,14 @@ exports.deleteResume = function(resumeId, callback) {
 };
 
 exports.editEducation = function(id, newEducation, callback) {
-	Education.find(id).success(function(education) {
-		education.range = newEducation.range;
-		education.school = newEducation.school;
-		education.major = newEducation.major;
-		education.save().success(function(education) {
-			callback(null);
-		}).error(function(err) {
-			callback(err);
-		});
+	Education.update({
+		school: newEducation.school,
+		range: newEducation.range,
+		major: newEducation.major
+	}, {
+		id: id
+	}).success(function(education) {
+		callback(null);
 	}).error(function(err) {
 		callback(err);
 	});
@@ -177,27 +188,33 @@ exports.addEducation = function(resumeId, newEducation, callback) {
 };
 
 exports.deleteEducation = function(education_id, callback) {
-	Education.find(education_id).success(function(education) {
-		education.destroy().success(function(edu) {
-			callback(null);
-		}).error(function(err) {
-			callback(err);
-		});
+	// Education.find(education_id).success(function(education) {
+	// 	education.destroy().success(function(edu) {
+	// 		callback(null);
+	// 	}).error(function(err) {
+	// 		callback(err);
+	// 	});
+	// }).error(function(err) {
+	// 	callback(err);
+	// });
+	Education.destroy({
+		id: education_id
+	}).success(function(edu) {
+		callback(null);
 	}).error(function(err) {
 		callback(err);
 	});
 };
 
 exports.editProject = function(id, newProject, callback) {
-	Project.find(id).success(function(project) {
-		project.range = newProject.range;
-		project.company = newProject.company;
-		project.description = newProject.description;
-		project.save().success(function(project) {
-			callback(null);
-		}).error(function(err) {
-			callback(err);
-		});
+	Project.update({
+		company: newProject.company,
+		range: newProject.range,
+		description: newProject.description
+	}, {
+		id: id
+	}).success(function(project) {
+		callback(null);
 	}).error(function(err) {
 		callback(err);
 	});
@@ -217,12 +234,10 @@ exports.addProject = function(resumeId, newProject, callback) {
 };
 
 exports.deleteProject = function(project_id, callback) {
-	Project.find(project_id).success(function(project) {
-		project.destroy().success(function(pro) {
-			callback(null);
-		}).error(function(err) {
-			callback(err);
-		});
+	Project.destroy({
+		id: project_id
+	}).success(function(project) {
+		callback(null);
 	}).error(function(err) {
 		callback(err);
 	});
@@ -237,25 +252,31 @@ exports.addNewResume = function(userId, newResume, callback) {
 		address: newResume.basicInfo.address,
 		user_id: userId
 	}).success(function(resume) {
-		Education.create({
-			range: newResume.education.range,
-			school: newResume.education.school,
-			major: newResume.education.major,
-			resume_id: resume.id
-		}).success(function(education) {
+		if (newResume.education.school !== '') {
+			Education.create({
+				range: newResume.education.range,
+				school: newResume.education.school,
+				major: newResume.education.major,
+				resume_id: resume.id
+			}).success(function(education) {
+				//callback(null);
+			}).error(function(err) {
+				callback(err);
+			});
+		}
+		if (newResume.project.company !== '') {
 			Project.create({
 				range: newResume.project.range,
 				company: newResume.project.company,
 				description: newResume.project.description,
 				resume_id: resume.id
 			}).success(function(project) {
-				callback(null);
+				//callback(null);
 			}).error(function(err) {
 				callback(err);
 			});
-		}).error(function(err) {
-			callback(err);
-		});
+		}
+		callback(null);
 	}).error(function(err) {
 		callback(err);
 	});

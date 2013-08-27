@@ -1,7 +1,6 @@
 $(function() {
 	var _changePasswordForm = $('#change-password-form');
 	var _changeBtn = $('#btn-change-password');
-	var _backBtn = $('#btn-back');
 
 	_changePasswordForm.validate({
 		rules: {
@@ -10,19 +9,16 @@ $(function() {
 				minlength: 6,
 				maxlength: 16
 			},
-			password1: {
+			new_password: {
 				required: true,
 				minlength: 6,
 				maxlength: 16
 			},
-			password2: {
+			new_password_again: {
 				required: true,
-				equalTo: "#input-password1"
+				equalTo: "#input-new-password"
 			}
 		}
 	});
 
-	_backBtn.on('click', function() {
-		window.location.href = '/resumes';
-	});
 });

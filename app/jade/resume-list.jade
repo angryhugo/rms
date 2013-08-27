@@ -37,18 +37,30 @@ block main-content
                         div.span3
                             h3
                                 | Address
-                    - for (var i=0;i<resumeList.length;i++)
-                        div.span12(id='resume-list#{resumeList[i].id}')
+                    //- - for (var i=0;i<resumeList.length;i++)
+                    //-     div.span12(id='resume-list#{resumeList[i].id}')
+                    //-         div.span3
+                    //-             | #{resumeList[i].name}
+                    //-         div.span3
+                    //-             | #{resumeList[i].email}
+                    //-         div.span3
+                    //-             | #{resumeList[i].address}
+                    //-         div.span2
+                    //-             button.btn.btn-show-resume.btn-color(data-index='#{resumeList[i].id}',type='button') view
+                    //-             span
+                    //-                 button.btn.btn-delete-resume.btn-color(type='button', data-index='#{resumeList[i].id}') delete
+                    each resume in resumeList
+                        div.span12(id='resume-list#{resume.id}')
                             div.span3
-                                | #{resumeList[i].name}
+                                | #{resume.name}
                             div.span3
-                                | #{resumeList[i].email}
+                                | #{resume.email}
                             div.span3
-                                | #{resumeList[i].address}
+                                | #{resume.address}
                             div.span2
-                                button.btn.btn-show-resume.btn-color(data-index='#{resumeList[i].id}',type='button') view
+                                button.btn.btn-show-resume.btn-color(data-index='#{resume.id}',type='button') view
                                 span
-                                    button.btn.btn-delete-resume.btn-color(type='button', data-index='#{resumeList[i].id}') delete
+                                    button.btn.btn-delete-resume.btn-color(type='button', data-index='#{resume.id}') delete
 
 
 block scripts

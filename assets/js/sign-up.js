@@ -1,7 +1,5 @@
 $(function() {
 	var _signUpForm = $('#sign-up-form');
-	var _loginBtn = $('#btn-login');
-	var _signUpBtn = $('#btn-sign-up');
 
 	_signUpForm.validate({
 		rules: {
@@ -10,19 +8,15 @@ $(function() {
 				email: true
 			},
 			name: "required",
-			password1: {
+			password: {
 				required: true,
 				minlength: 6,
 				maxlength: 16
 			},
-			password2: {
+			password_again: {
 				required: true,
-				equalTo: "#input-password1"
+				equalTo: "#input-password"
 			}
 		}
-	});
-
-	_loginBtn.on('click', function() {
-		window.location.href = '/account/login';
 	});
 });
