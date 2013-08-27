@@ -183,8 +183,6 @@ $(function() {
         deleteProject(index);
     });
 
-
-
     _showEditResumeBtn.bind('click', showEditResume);
 
     _submitEditResumeBtn.bind('click', submitEditResume);
@@ -198,15 +196,6 @@ $(function() {
         var index = $(this).data("index");
         deleteEducation(index);
     });
-
-    // _cancelEditEducationBtn.bind('click', function() {
-    //     //_editEducation.fadeOut("slow");
-    //     //清空
-    //     _eidtUniversity.val("");
-    //     $('#edit-university-period').val("");
-    //     _editUniversityMajor.val("");
-    //     _editUniversityDescription.val("");
-    // });
 
     _submitEditEducationBtn.bind('click', submitEditEducation);
 
