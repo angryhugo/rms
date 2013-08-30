@@ -1,6 +1,14 @@
 var dbHelper = require('../models/dbHelper');
 
 module.exports = {
+
+    loginCheck: function(req, res, next) {
+        if (req.session.userId) {
+            return next();
+        }
+        res.redirect('/login');
+    },
+
     login: function(req, res) {
         var errMessage = req.session.errMessage || '';
         req.session.errMessage = '';

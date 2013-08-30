@@ -1,3 +1,4 @@
+include mixin
 doctype 5
 html
     head
@@ -78,21 +79,11 @@ html
                         span.icon-bar
                     div#navigation.nav-collapse.collapse
                         ul.nav
-                            li#menu-item-index
-                                a(title='resume list',href='/resumes')
-                                    i.icon-list
-                            li#menu-item-show-resume
-                                a(title='click "view" from resume-list page',style="cursor:default")
-                                    i.icon-file
-                            li#menu-item-new-resume
-                                a(title='new resume',href='/resumes/new') 
-                                    i.icon-edit
-                            li#menu-item-change-password
-                                a(title='change password',href='/password')
-                                    i.icon-lock
-                            li#menu-item-logout
-                                a#logout(title='logout',href='/logout') 
-                                    i.icon-signout
+                            mixin menu-item('#menu-item-index','resume list','/resumes','icon-list')
+                            mixin menu-item('#menu-item-show-resume','click "view" from resume-list page','javascript:;','icon-file','cursor:default')
+                            mixin menu-item('#menu-item-new-resume','new resume','/resumes/new','icon-edit')
+                            mixin menu-item('#menu-item-change-password','change password','/password','icon-lock')
+                            mixin menu-item('#menu-item-logout','logout','/logout','icon-signout')
 
         block main-content
 

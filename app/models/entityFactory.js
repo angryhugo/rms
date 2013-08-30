@@ -82,6 +82,15 @@ var Project = sequelize.define('project', {
 Project.belongsTo(Resume);
 Resume.hasMany(Project);
 
+//若表不存在 会创建表
+sequelize.sync({
+    force: false
+}).success(function() {
+    console.log('ok');
+}).error(function(err) {
+    console.log(err);
+});
+
 module.exports = {
     sequelize: sequelize,
     User: User,
